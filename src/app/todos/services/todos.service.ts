@@ -17,22 +17,22 @@ export class TodosService {
     return this.http.get<Todo[]>(url).pipe(map((todos) => todos.slice(0, 10)));
   }
 
-  createTodo(todo: Todo): Observable<Todo> {
+  createTodo(reqTodo: Todo): Observable<Todo> {
     const url = `${this.apiUrl}/todos`;
     return this.http
-      .post(url, { todo })
-      .pipe(map((response: any) => response.todo));
+      .post<{ todo: Todo }>(url, { reqTodo })
+      .pipe(map(({ todo }) => todo));
   }
 
   updateTodo(todo: Partial<Todo>): Observable<Todo> {
     const url = `${this.apiUrl}/todos/${todo.id}`;
     return this.http
-      .patch(url, { todo })
-      .pipe(map((response: any) => response.todo));
+      .patch<{ todo: Todo }>(url, { todo })
+      .pipe(map(({ todo: resTodo }) => resTodo));
   }
 
   deleteTodo(id: number): Observable<Todo> {
     const url = `${this.apiUrl}/todos/${id}`;
-    return this.http.delete(url).pipe(map((response: any) => response.todo));
+    return this.http.delete<{ todo: Todo }>(url).pipe(map(({ todo }) => todo));
   }
 }

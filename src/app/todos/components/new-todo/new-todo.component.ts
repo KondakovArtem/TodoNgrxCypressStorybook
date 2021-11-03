@@ -26,9 +26,9 @@ export class NewTodoComponent implements OnInit {
     ]);
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  addTodo() {
+  addTodo(): void {
     if (this.textField.valid) {
       const text: string = this.textField.value;
       this.textField.setValue("", { emitEvent: false });

@@ -14,5 +14,5 @@ export class FooterComponent implements OnInit {
   @Input() countTodos: number;
   @Input() currentFilter: string;
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

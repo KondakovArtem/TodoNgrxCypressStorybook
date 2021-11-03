@@ -1,14 +1,7 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  MetaReducer,
-} from "@ngrx/store";
+import { ActionReducerMap, createFeatureSelector } from "@ngrx/store";
 import { routerReducer, RouterReducerState } from "@ngrx/router-store";
-import { storeLogger } from "ngrx-store-logger";
-import { metaReducerForStorybook } from "storybook-ngrx-helper";
 
-import { environment } from "@environments/environment";
+import { metaReducers as envMetaReducers } from "@environments/environment";
 import { RouterStateUrl } from "./custom-route-serializer";
 
 export interface State {
@@ -19,13 +12,7 @@ export const reducers: ActionReducerMap<State> = {
   router: routerReducer,
 };
 
-export const metaReducers: MetaReducer<State>[] = !environment.production
-  ? [
-      metaReducerForStorybook,
-      (reducer: ActionReducer<any>) =>
-        storeLogger({ collapsed: true })(reducer),
-    ]
-  : [];
+export const metaReducers = envMetaReducers;
 
 export const getRouterState =
   createFeatureSelector<RouterReducerState<RouterStateUrl>>("router");

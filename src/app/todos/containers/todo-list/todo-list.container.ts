@@ -25,12 +25,12 @@ export class TodoListContainer implements OnInit {
 
   ngOnInit() {}
 
-  onUpdate(update: Update<Todo>) {
+  onUpdate(update: Update<Todo>): void {
     const action = updateTodoRequest({ update });
     this.store.dispatch(action);
   }
 
-  onDelete(id: number) {
+  onDelete(id: number): void {
     const action = deleteTodoRequest({ id });
     this.store.dispatch(action);
   }

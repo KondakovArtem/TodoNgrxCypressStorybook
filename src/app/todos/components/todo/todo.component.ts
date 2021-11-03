@@ -54,9 +54,9 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  updateText() {
+  updateText(): void {
     if (this.textField.valid && this.editing) {
       const update = {
         id: this._todo.id,
@@ -69,14 +69,14 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  activeEditMode() {
+  activeEditMode(): void {
     this.editing = true;
     setTimeout(() => {
       this.textInput.nativeElement.focus();
     });
   }
 
-  deleteTodo() {
+  deleteTodo(): void {
     this.delete.emit(this._todo.id);
   }
 }

@@ -24,7 +24,7 @@ export class LayoutContainer implements OnInit {
 
   ngOnInit() {}
 
-  onSaveTodo(title: string) {
+  onSaveTodo(title: string): void {
     const todo: Todo = {
       id: Math.floor(Math.random() * (300 - 200)) + 200,
       title,
