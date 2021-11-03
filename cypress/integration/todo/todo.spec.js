@@ -28,11 +28,11 @@ describe("Test Suite ...", () => {
       { headers: {} }
     );
 
-    cy.wait(1000);
+    cy.wait(100);
     cy.get(":nth-child(1) > li > div > input").click();
     cy.get("#new-todo").type("test{enter}").blur();
     cy.wait(["@postTodos", "@pathTodo"]);
-    cy.wait(1000);
+    cy.wait(100);
 
     // snapshot name will be the test title
     if (Cypress.browser.isHeadless) {
