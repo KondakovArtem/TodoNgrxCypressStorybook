@@ -1,11 +1,7 @@
 <li [class.completed]="_todo.completed" [class.editing]="editing">
   <div class="view">
-    <input
-    class="toggle"
-    type="checkbox"
-    [formControl]="checkField"/>
-    <label
-      (dblclick)="activeEditMode()">
+    <input class="toggle" type="checkbox" [formControl]="checkField" />
+    <label (dblclick)="activeEditMode()">
       {{ _todo.title }}
     </label>
     <a class="detail" [routerLink]="['/detail', _todo.id]">></a>
@@ -18,5 +14,6 @@
     (keyup.enter)="updateText()"
     (blur)="updateText()"
     [formControl]="textField"
-    [hidden]="editing" />
+    [hidden]="editing"
+  />
 </li>

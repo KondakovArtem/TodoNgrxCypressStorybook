@@ -1,18 +1,18 @@
-import { createSelector } from '@ngrx/store';
+import { createSelector } from "@ngrx/store";
 
-import { getTodosModuleState } from '@todos/reducers';
-import { todosAdapter } from '@todos/states';
-import { getRouterState } from '@app/reducers';
+import { getTodosModuleState } from "@todos/reducers";
+import { todosAdapter } from "@todos/states";
+import { getRouterState } from "@app/reducers";
 
 export const geTodosState = createSelector(
   getTodosModuleState,
-  state => state.todos
+  (state) => state.todos
 );
 
 export const {
   selectAll: getAllTodos,
   selectTotal: getCountAllTodos,
-  selectEntities: getEntitiesTodos
+  selectEntities: getEntitiesTodos,
 } = todosAdapter.getSelectors(geTodosState);
 
 export const getVisibleTodos = createSelector(
@@ -21,14 +21,14 @@ export const getVisibleTodos = createSelector(
   (todos, router) => {
     if (router?.state?.params) {
       const filter = router.state.params.filter;
-        switch (filter) {
-          default:
-            return todos;
-          case 'completed':
-            return todos.filter(t => t.completed);
-          case 'active':
-            return todos.filter(t => !t.completed);
-        }
+      switch (filter) {
+        default:
+          return todos;
+        case "completed":
+          return todos.filter((t) => t.completed);
+        case "active":
+          return todos.filter((t) => !t.completed);
+      }
     }
     return todos;
   }
@@ -51,21 +51,17 @@ export const getCountVisibleTodos = createSelector(
   (todos) => todos.length
 );
 
-
-export const getFilter = createSelector(
-  getRouterState,
-  (router) => {
-    if (router && router.state && router.state.params.filter) {
-      const filter = router.state.params.filter;
-      switch (filter) {
-        default:
-          return 'all';
-        case 'completed':
-          return 'completed';
-        case 'active':
-          return 'active';
-      }
+export const getFilter = createSelector(getRouterState, (router) => {
+  if (router && router.state && router.state.params.filter) {
+    const filter = router.state.params.filter;
+    switch (filter) {
+      default:
+        return "all";
+      case "completed":
+        return "completed";
+      case "active":
+        return "active";
     }
-    return 'all';
   }
-);
+  return "all";
+});

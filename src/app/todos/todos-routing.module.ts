@@ -1,29 +1,29 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { LayoutContainer } from './containers/layout/layout.container';
-import { TodoDetailContainer } from './containers/todo-detail/todo-detail.container';
-import { TodosGuard } from '@todos/guards/todos.guard';
+import { LayoutContainer } from "./containers/layout/layout.container";
+import { TodoDetailContainer } from "./containers/todo-detail/todo-detail.container";
+import { TodosGuard } from "@todos/guards/todos.guard";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: LayoutContainer,
-    canActivate: [ TodosGuard ]
+    canActivate: [TodosGuard],
   },
   {
-    path: ':filter',
+    path: ":filter",
     component: LayoutContainer,
-    canActivate: [ TodosGuard ]
+    canActivate: [TodosGuard],
   },
   {
-    path: 'detail/:id',
+    path: "detail/:id",
     component: TodoDetailContainer,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TodosRoutingModule { }
+export class TodosRoutingModule {}

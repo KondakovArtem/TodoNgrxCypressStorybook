@@ -1,22 +1,22 @@
 import {
   ActionReducerMap,
   createFeatureSelector,
-  MetaReducer
-} from '@ngrx/store';
-import { environment } from '@environments/environment';
+  MetaReducer,
+} from "@ngrx/store";
+import { environment } from "@environments/environment";
 
-import { TodosModuleState } from '@todos/states';
+import { TodosModuleState } from "@todos/states";
 
-import { todosReducer } from './todos.reducer';
-import { todosUIReducer } from './todos-ui.reducer';
+import { todosReducer } from "./todos.reducer";
+import { todosUIReducer } from "./todos-ui.reducer";
 
 export const reducers: ActionReducerMap<TodosModuleState> = {
   todos: todosReducer,
-  todosUI: todosUIReducer
+  todosUI: todosUIReducer,
 };
 
-export const metaReducers: MetaReducer<TodosModuleState>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<TodosModuleState>[] =
+  !environment.production ? [] : [];
 
-export const getTodosModuleState = createFeatureSelector<TodosModuleState>(
-  'todos-module'
-);
+export const getTodosModuleState =
+  createFeatureSelector<TodosModuleState>("todos-module");

@@ -1,5 +1,3 @@
-import { TodosGuard } from './todos.guard';
+import { TodosGuard } from "./todos.guard";
 
-export const GUARDS: any[] = [
-  TodosGuard
-];
+export const GUARDS: any[] = [TodosGuard];

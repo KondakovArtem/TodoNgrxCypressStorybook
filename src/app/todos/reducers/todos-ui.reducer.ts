@@ -1,6 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
-import * as TodoUIActions from '@todos/actions/todos-ui.actions';
-import { TodosUIState } from '@todos/states';
+import { createReducer, on } from "@ngrx/store";
+import * as TodoUIActions from "@todos/actions/todos-ui.actions";
+import { TodosUIState } from "@todos/states";
 
 export const initialState: TodosUIState = {
   loadingTodos: false,
@@ -19,84 +19,84 @@ export const todosUIReducer = createReducer(
     return {
       ...state,
       loadingTodos: true,
-      errorLoadingTodos: null
+      errorLoadingTodos: null,
     };
   }),
   on(TodoUIActions.loadTodosSuccess, (state) => {
     return {
       ...state,
       loadingTodos: false,
-      errorLoadingTodos: null
+      errorLoadingTodos: null,
     };
   }),
-  on(TodoUIActions.loadTodosFail, (state, {error}) => {
+  on(TodoUIActions.loadTodosFail, (state, { error }) => {
     return {
       ...state,
       loadingTodos: false,
-      errorLoadingTodos: error || null
+      errorLoadingTodos: error || null,
     };
   }),
   on(TodoUIActions.addTodoRequest, (state) => {
     return {
       ...state,
       loadingAddTodo: true,
-      errorAddTodo: null
+      errorAddTodo: null,
     };
   }),
   on(TodoUIActions.loadTodosSuccess, (state) => {
     return {
       ...state,
       loadingAddTodo: false,
-      errorAddTodo: null
+      errorAddTodo: null,
     };
   }),
-  on(TodoUIActions.loadTodosFail, (state, {error}) => {
+  on(TodoUIActions.loadTodosFail, (state, { error }) => {
     return {
       ...state,
       loadingAddTodo: false,
-      errorAddTodo: error || null
+      errorAddTodo: error || null,
     };
   }),
   on(TodoUIActions.updateTodoRequest, (state) => {
     return {
       ...state,
       loadingUpdateTodo: true,
-      errorUpdateTodo: null
+      errorUpdateTodo: null,
     };
   }),
   on(TodoUIActions.updateTodoSuccess, (state) => {
     return {
       ...state,
       loadingUpdateTodo: false,
-      errorUpdateTodo: null
+      errorUpdateTodo: null,
     };
   }),
-  on(TodoUIActions.addTodoFail, (state, {error}) => {
+  on(TodoUIActions.addTodoFail, (state, { error }) => {
     return {
       ...state,
       loadingUpdateTodo: false,
-      errorUpdateTodo: error || null
+      errorUpdateTodo: error || null,
     };
   }),
   on(TodoUIActions.deleteTodoRequest, (state) => {
     return {
       ...state,
       loadingDeleteTodo: true,
-      errorDeleteTodo: null
+      errorDeleteTodo: null,
     };
   }),
   on(TodoUIActions.deleteTodoSuccess, (state) => {
     return {
       ...state,
       loadingDeleteTodo: false,
-      errorDeleteTodo: null
+      errorDeleteTodo: null,
     };
   }),
-  on(TodoUIActions.deleteTodoFail, (state, {error}) => {
+  on(TodoUIActions.deleteTodoFail, (state, { error }) => {
     return {
       ...state,
       loadingDeleteTodo: false,
-      errorDeleteTodo: error || null
+      errorDeleteTodo: error || null,
     };
-  }),
+  })
 );

@@ -1,5 +1,3 @@
-import { TodosService } from './todos.service';
+import { TodosService } from "./todos.service";
 
-export const SERVICES: any[] = [
-  TodosService
-];
+export const SERVICES: any[] = [TodosService];

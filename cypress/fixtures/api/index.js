@@ -11,8 +11,6 @@ const store = {
   todos: cloneDeep(todos),
 };
 
-debugger;
-
 export const rests = [
   ...createCRUDRests({
     STORE_GET: () => store.todos,

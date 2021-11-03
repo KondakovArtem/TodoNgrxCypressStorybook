@@ -48,7 +48,7 @@ Object.assign(Basic, {
           ids: ["1", "2"],
         },
       } as Partial<TodosModuleState>,
-    }
+    },
   },
   parameters: {
     msw: [...todoRests],

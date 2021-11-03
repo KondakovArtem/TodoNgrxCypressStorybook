@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "RouterStateUrl",
-            "id": "interface-RouterStateUrl-8289703db2e78b367c8585e3e364105e",
+            "id": "interface-RouterStateUrl-3ac842948ff205b6c898c17a8c5eec8e",
             "file": "src/app/reducers/custom-route-serializer.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Params, RouterStateSnapshot } from '@angular/router';\nimport { RouterStateSerializer } from '@ngrx/router-store';\n\nexport interface RouterStateUrl {\n  url: string;\n  params: Params;\n  queryParams: Params;\n}\n\nexport class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {\n  serialize(routerState: RouterStateSnapshot): RouterStateUrl {\n    let route = routerState.root;\n\n    while (route.firstChild) {\n      route = route.firstChild;\n    }\n\n    const {\n      url,\n      root: { queryParams },\n    } = routerState;\n    const { params } = route;\n\n    // Only return an object including the URL, params and query params\n    // instead of the entire snapshot\n    return { url, params, queryParams };\n  }\n}\n",
+            "sourceCode": "import { Params, RouterStateSnapshot } from \"@angular/router\";\nimport { RouterStateSerializer } from \"@ngrx/router-store\";\n\nexport interface RouterStateUrl {\n  url: string;\n  params: Params;\n  queryParams: Params;\n}\n\nexport class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {\n  serialize(routerState: RouterStateSnapshot): RouterStateUrl {\n    let route = routerState.root;\n\n    while (route.firstChild) {\n      route = route.firstChild;\n    }\n\n    const {\n      url,\n      root: { queryParams },\n    } = routerState;\n    const { params } = route;\n\n    // Only return an object including the URL, params and query params\n    // instead of the entire snapshot\n    return { url, params, queryParams };\n  }\n}\n",
             "properties": [
                 {
                     "name": "params",
@@ -44,12 +44,12 @@
         },
         {
             "name": "State",
-            "id": "interface-State-fa0aea4edda9579bcf2205984cabda30",
+            "id": "interface-State-15975fa2f52cffe5e4e434d14fcd899d",
             "file": "src/app/reducers/index.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {\n  ActionReducer,\n  ActionReducerMap,\n  createFeatureSelector,\n  MetaReducer,\n} from \"@ngrx/store\";\nimport { routerReducer, RouterReducerState } from \"@ngrx/router-store\";\nimport { storeLogger } from \"ngrx-store-logger\";\nimport { metaReducerForStorybook } from \"storybook-ngrx-helper\";\n\nimport { RouterStateUrl } from \"./custom-route-serializer\";\nimport { environment } from \"@environments/environment\";\n\nexport interface State {\n  router: RouterReducerState<RouterStateUrl>;\n}\n\nexport const reducers: ActionReducerMap<State> = {\n  router: routerReducer,\n};\n\nexport const metaReducers: MetaReducer<State>[] = !environment.production\n  ? [\n      metaReducerForStorybook,\n      (reducer: ActionReducer<any>) =>\n        storeLogger({ collapsed: true })(reducer),\n    ]\n  : [];\n\nexport const getRouterState = createFeatureSelector<\n  RouterReducerState<RouterStateUrl>\n>(\"router\");\n",
+            "sourceCode": "import {\n  ActionReducer,\n  ActionReducerMap,\n  createFeatureSelector,\n  MetaReducer,\n} from \"@ngrx/store\";\nimport { routerReducer, RouterReducerState } from \"@ngrx/router-store\";\nimport { storeLogger } from \"ngrx-store-logger\";\nimport { metaReducerForStorybook } from \"storybook-ngrx-helper\";\n\nimport { RouterStateUrl } from \"./custom-route-serializer\";\nimport { environment } from \"@environments/environment\";\n\nexport interface State {\n  router: RouterReducerState<RouterStateUrl>;\n}\n\nexport const reducers: ActionReducerMap<State> = {\n  router: routerReducer,\n};\n\nexport const metaReducers: MetaReducer<State>[] = !environment.production\n  ? [\n      metaReducerForStorybook,\n      (reducer: ActionReducer<any>) =>\n        storeLogger({ collapsed: true })(reducer),\n    ]\n  : [];\n\nexport const getRouterState =\n  createFeatureSelector<RouterReducerState<RouterStateUrl>>(\"router\");\n",
             "properties": [
                 {
                     "name": "router",
@@ -108,12 +108,12 @@
         },
         {
             "name": "TodosModuleState",
-            "id": "interface-TodosModuleState-102aaaf7d192aa8c42363ce1f744832a",
+            "id": "interface-TodosModuleState-0f3557ed590e4ec1e34a41d2d609b080",
             "file": "src/app/todos/states/todos-module.state.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { TodosState } from './todos.state';\nimport { TodosUIState } from './todos-ui.state';\n\nexport interface TodosModuleState {\n  todos: TodosState;\n  todosUI: TodosUIState;\n}\n",
+            "sourceCode": "import { TodosState } from \"./todos.state\";\nimport { TodosUIState } from \"./todos-ui.state\";\n\nexport interface TodosModuleState {\n  todos: TodosState;\n  todosUI: TodosUIState;\n}\n",
             "properties": [
                 {
                     "name": "todos",
@@ -137,19 +137,6 @@
             "indexSignatures": [],
             "kind": 164,
             "methods": []
-        },
-        {
-            "name": "TodosState",
-            "id": "interface-TodosState-4e76a2ed49db26443211657bbebfdf1d",
-            "file": "src/app/todos/states/todos.state.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "interface",
-            "sourceCode": "import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';\nimport { Todo } from '@todos/models';\n\n// tslint:disable-next-line: no-empty-interface\nexport interface TodosState extends EntityState<Todo> {}\n\nexport const todosAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();\n\n",
-            "properties": [],
-            "indexSignatures": [],
-            "methods": [],
-            "extends": "EntityState"
         },
         {
             "name": "TodosUIState",
@@ -241,7 +228,7 @@
     "injectables": [
         {
             "name": "TodosEffects",
-            "id": "injectable-TodosEffects-9e39878c9b3b17a944ef45456e22ae88",
+            "id": "injectable-TodosEffects-86fbb87943e292deaafcc4c7ce57de70",
             "file": "src/app/todos/effects/todos.effects.ts",
             "properties": [
                 {
@@ -290,7 +277,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from \"@angular/core\";\nimport { Actions, Effect, ofType, createEffect } from \"@ngrx/effects\";\nimport { of } from \"rxjs\";\nimport { switchMap, catchError, mergeMap, map } from \"rxjs/operators\";\n\nimport {\n  loadTodos,\n  loadTodosRequest,\n  loadTodosSuccess,\n  loadTodosFail,\n  addTodo,\n  addTodoRequest,\n  addTodoSuccess,\n  addTodoFail,\n  updateTodo,\n  updateTodoRequest,\n  updateTodoSuccess,\n  updateTodoFail,\n  deleteTodo,\n  deleteTodoRequest,\n  deleteTodoSuccess,\n  deleteTodoFail,\n} from \"@todos/actions\";\n\nimport { TodosService } from \"@todos/services/todos.service\";\n\n@Injectable()\nexport class TodosEffects {\n  loadTodosRequest = createEffect(() =>\n    this.actions$.pipe(\n      ofType(loadTodosRequest),\n      switchMap(() => {\n        return this.todosService.getAllTodos().pipe(\n          mergeMap((todos) => [loadTodos({ todos }), loadTodosSuccess()]),\n          catchError((error) => of(loadTodosFail({ error })))\n        );\n      })\n    )\n  );\n\n  addTodoRequest$ = createEffect(() =>\n    this.actions$.pipe(\n      ofType(addTodoRequest),\n      switchMap((action) => {\n        return this.todosService.createTodo(action.todo).pipe(\n          mergeMap((newTodo) => [addTodo({ todo: newTodo }), addTodoSuccess()]),\n          catchError((error) => of(addTodoFail({ error })))\n        );\n      })\n    )\n  );\n\n  updateTodoRequest$ = createEffect(() =>\n    this.actions$.pipe(\n      ofType(updateTodoRequest),\n      switchMap((action) => {\n        const { update } = action;\n        return this.todosService\n          .updateTodo({\n            ...update.changes,\n            id: update.id as number,\n          })\n          .pipe(\n            mergeMap(() => [updateTodo({ update }), updateTodoSuccess()]),\n            catchError((error) => of(updateTodoFail({ error })))\n          );\n      })\n    )\n  );\n\n  deleteTodoRequest$ = createEffect(() =>\n    this.actions$.pipe(\n      ofType(deleteTodoRequest),\n      switchMap((action) => {\n        const id = action.id;\n        return this.todosService.deleteTodo(id).pipe(\n          mergeMap(() => [deleteTodo({ id }), deleteTodoSuccess()]),\n          catchError((error) => of(deleteTodoFail({ error })))\n        );\n      })\n    )\n  );\n\n  constructor(private actions$: Actions, private todosService: TodosService) {}\n}\n",
+            "sourceCode": "import { Injectable } from \"@angular/core\";\nimport { Actions, ofType, createEffect } from \"@ngrx/effects\";\nimport { of } from \"rxjs\";\nimport { switchMap, catchError, mergeMap } from \"rxjs/operators\";\n\nimport {\n  loadTodos,\n  loadTodosRequest,\n  loadTodosSuccess,\n  loadTodosFail,\n  addTodo,\n  addTodoRequest,\n  addTodoSuccess,\n  addTodoFail,\n  updateTodo,\n  updateTodoRequest,\n  updateTodoSuccess,\n  updateTodoFail,\n  deleteTodo,\n  deleteTodoRequest,\n  deleteTodoSuccess,\n  deleteTodoFail,\n} from \"@todos/actions\";\n\nimport { TodosService } from \"@todos/services/todos.service\";\n\n@Injectable()\nexport class TodosEffects {\n  loadTodosRequest = createEffect(() =>\n    this.actions$.pipe(\n      ofType(loadTodosRequest),\n      switchMap(() => {\n        return this.todosService.getAllTodos().pipe(\n          mergeMap((todos) => [loadTodos({ todos }), loadTodosSuccess()]),\n          catchError((error) => of(loadTodosFail({ error })))\n        );\n      })\n    )\n  );\n\n  addTodoRequest$ = createEffect(() =>\n    this.actions$.pipe(\n      ofType(addTodoRequest),\n      switchMap((action) => {\n        return this.todosService.createTodo(action.todo).pipe(\n          mergeMap((newTodo) => [addTodo({ todo: newTodo }), addTodoSuccess()]),\n          catchError((error) => of(addTodoFail({ error })))\n        );\n      })\n    )\n  );\n\n  updateTodoRequest$ = createEffect(() =>\n    this.actions$.pipe(\n      ofType(updateTodoRequest),\n      switchMap((action) => {\n        const { update } = action;\n        return this.todosService\n          .updateTodo({\n            ...update.changes,\n            id: update.id as number,\n          })\n          .pipe(\n            mergeMap(() => [updateTodo({ update }), updateTodoSuccess()]),\n            catchError((error) => of(updateTodoFail({ error })))\n          );\n      })\n    )\n  );\n\n  deleteTodoRequest$ = createEffect(() =>\n    this.actions$.pipe(\n      ofType(deleteTodoRequest),\n      switchMap((action) => {\n        const id = action.id;\n        return this.todosService.deleteTodo(id).pipe(\n          mergeMap(() => [deleteTodo({ id }), deleteTodoSuccess()]),\n          catchError((error) => of(deleteTodoFail({ error })))\n        );\n      })\n    )\n  );\n\n  constructor(private actions$: Actions, private todosService: TodosService) {}\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -336,7 +323,7 @@
         },
         {
             "name": "TodosService",
-            "id": "injectable-TodosService-3b07e78a487e1b8e0d291918a3dce470",
+            "id": "injectable-TodosService-110e23b0c68c33854515efd733a91992",
             "file": "src/app/todos/services/todos.service.ts",
             "properties": [],
             "methods": [
@@ -353,7 +340,7 @@
                     "optional": false,
                     "returnType": "Observable<Todo>",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 20,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -381,7 +368,7 @@
                     "optional": false,
                     "returnType": "Observable<Todo>",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -402,7 +389,7 @@
                     "optional": false,
                     "returnType": "Observable<Todo[]>",
                     "typeParameters": [],
-                    "line": 17,
+                    "line": 15,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -419,7 +406,7 @@
                     "optional": false,
                     "returnType": "Observable<Todo>",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -439,7 +426,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable, Inject } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\nimport { Todo } from '@todos/models';\nimport { Observable } from 'rxjs';\nimport { map } from 'rxjs/operators';\n\n@Injectable()\nexport class TodosService {\n\n  constructor(\n    @Inject('API_URL') private apiUrl: string,\n    private http: HttpClient\n  ) {\n  }\n\n  getAllTodos(): Observable<Todo[]> {\n    const url = `${this.apiUrl}/todos`;\n    return this.http.get<Todo[]>(url)\n    .pipe(\n      map(todos => todos.slice(0, 10)),\n    );\n  }\n\n  createTodo(todo: Todo): Observable<Todo> {\n    const url = `${this.apiUrl}/todos`;\n    return this.http.post(url, {todo})\n    .pipe(\n      map((response: any) => response.todo),\n    );\n  }\n\n  updateTodo(todo: Partial<Todo>): Observable<Todo> {\n    const url = `${this.apiUrl}/todos/${todo.id}`;\n    return this.http.patch(url, {todo})\n    .pipe(\n      map((response: any) => response.todo),\n    );\n  }\n\n  deleteTodo(id: number): Observable<Todo> {\n    const url = `${this.apiUrl}/todos/${id}`;\n    return this.http.delete(url)\n    .pipe(\n      map((response: any) => response.todo),\n    );\n  }\n\n}\n",
+            "sourceCode": "import { Injectable, Inject } from \"@angular/core\";\nimport { HttpClient } from \"@angular/common/http\";\n\nimport { Todo } from \"@todos/models\";\nimport { Observable } from \"rxjs\";\nimport { map } from \"rxjs/operators\";\n\n@Injectable()\nexport class TodosService {\n  constructor(\n    @Inject(\"API_URL\") private apiUrl: string,\n    private http: HttpClient\n  ) {}\n\n  getAllTodos(): Observable<Todo[]> {\n    const url = `${this.apiUrl}/todos`;\n    return this.http.get<Todo[]>(url).pipe(map((todos) => todos.slice(0, 10)));\n  }\n\n  createTodo(todo: Todo): Observable<Todo> {\n    const url = `${this.apiUrl}/todos`;\n    return this.http\n      .post(url, { todo })\n      .pipe(map((response: any) => response.todo));\n  }\n\n  updateTodo(todo: Partial<Todo>): Observable<Todo> {\n    const url = `${this.apiUrl}/todos/${todo.id}`;\n    return this.http\n      .patch(url, { todo })\n      .pipe(map((response: any) => response.todo));\n  }\n\n  deleteTodo(id: number): Observable<Todo> {\n    const url = `${this.apiUrl}/todos/${id}`;\n    return this.http.delete(url).pipe(map((response: any) => response.todo));\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -565,50 +552,13 @@
     "interceptors": [],
     "classes": [
         {
-            "name": "AppPage",
-            "id": "class-AppPage-dcb32ef2c05e7b804ba490103360d420",
-            "file": "e2e/app.po.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "class",
-            "sourceCode": "import { browser, by, element } from 'protractor';\n\nexport class AppPage {\n  navigateTo() {\n    return browser.get('/');\n  }\n\n  getParagraphText() {\n    return element(by.css('app-root h1')).getText();\n  }\n}\n",
-            "properties": [],
-            "methods": [
-                {
-                    "name": "getParagraphText",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 8,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "navigateTo",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 4,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "indexSignatures": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "hostBindings": [],
-            "hostListeners": []
-        },
-        {
             "name": "CustomSerializer",
-            "id": "class-CustomSerializer-8289703db2e78b367c8585e3e364105e",
+            "id": "class-CustomSerializer-3ac842948ff205b6c898c17a8c5eec8e",
             "file": "src/app/reducers/custom-route-serializer.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { Params, RouterStateSnapshot } from '@angular/router';\nimport { RouterStateSerializer } from '@ngrx/router-store';\n\nexport interface RouterStateUrl {\n  url: string;\n  params: Params;\n  queryParams: Params;\n}\n\nexport class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {\n  serialize(routerState: RouterStateSnapshot): RouterStateUrl {\n    let route = routerState.root;\n\n    while (route.firstChild) {\n      route = route.firstChild;\n    }\n\n    const {\n      url,\n      root: { queryParams },\n    } = routerState;\n    const { params } = route;\n\n    // Only return an object including the URL, params and query params\n    // instead of the entire snapshot\n    return { url, params, queryParams };\n  }\n}\n",
+            "sourceCode": "import { Params, RouterStateSnapshot } from \"@angular/router\";\nimport { RouterStateSerializer } from \"@ngrx/router-store\";\n\nexport interface RouterStateUrl {\n  url: string;\n  params: Params;\n  queryParams: Params;\n}\n\nexport class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {\n  serialize(routerState: RouterStateSnapshot): RouterStateUrl {\n    let route = routerState.root;\n\n    while (route.firstChild) {\n      route = route.firstChild;\n    }\n\n    const {\n      url,\n      root: { queryParams },\n    } = routerState;\n    const { params } = route;\n\n    // Only return an object including the URL, params and query params\n    // instead of the entire snapshot\n    return { url, params, queryParams };\n  }\n}\n",
             "properties": [],
             "methods": [
                 {
@@ -651,12 +601,12 @@
         },
         {
             "name": "CustomValidators",
-            "id": "class-CustomValidators-3d40d078c2aa314985962f2e461154ec",
+            "id": "class-CustomValidators-7f530010f4cabe055a190610e823a756",
             "file": "src/app/utils/validators.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { FormControl } from '@angular/forms';\n\nexport class CustomValidators {\n\n  static isBlank(control: FormControl): { [key: string]: boolean } | null {\n    const value: string = control.value;\n    if (value === null || value === '') {\n      return null;\n    }\n    if (value.trim() === '') {\n      return { is_blank: true };\n    }\n    return null;\n  }\n\n}\n",
+            "sourceCode": "import { FormControl } from \"@angular/forms\";\n\nexport class CustomValidators {\n  static isBlank(control: FormControl): { [key: string]: boolean } | null {\n    const value: string = control.value;\n    if (value === null || value === \"\") {\n      return null;\n    }\n    if (value.trim() === \"\") {\n      return { is_blank: true };\n    }\n    return null;\n  }\n}\n",
             "properties": [],
             "methods": [
                 {
@@ -672,7 +622,7 @@
                     "optional": false,
                     "returnType": "literal type | null",
                     "typeParameters": [],
-                    "line": 5,
+                    "line": 4,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -701,12 +651,12 @@
     "directives": [
         {
             "name": "RouterInitDirective",
-            "id": "directive-RouterInitDirective-fe4053f01a30e5f04fd9a2721c92d2b7",
+            "id": "directive-RouterInitDirective-81e0895662970822632288a0953038a9",
             "file": "src/stories/directives/init-router.directive.ts",
             "type": "directive",
             "description": "<p>Вспомогательная директива для storybook, которая позволяет задать изначальное состояние хранилища store\nперед отображением stories</p>\n",
             "rawdescription": "\n\nВспомогательная директива для storybook, которая позволяет задать изначальное состояние хранилища store\nперед отображением stories\n",
-            "sourceCode": "import {\n  NgModule,\n  Directive,\n  Input,\n  OnChanges,\n  SimpleChanges,\n} from \"@angular/core\";\nimport { Router } from \"@angular/router\";\n\n/**\n * Вспомогательная директива для storybook, которая позволяет задать изначальное состояние хранилища store\n * перед отображением stories\n */\n\n@Directive({\n  selector: \"[routerInit]\",\n})\nexport class RouterInitDirective implements OnChanges {\n  constructor(private router: Router) {}\n\n  @Input() routerInit: string;\n\n  ngOnChanges(changes: SimpleChanges) {\n    debugger;\n    if (changes.routerInit && changes.routerInit.currentValue) {\n      this.router.navigateByUrl(changes.routerInit.currentValue);\n    }\n  }\n}\n\n@NgModule({\n  declarations: [RouterInitDirective],\n  exports: [RouterInitDirective],\n})\nexport class RoouterInitModule {}\n",
+            "sourceCode": "import {\n  NgModule,\n  Directive,\n  Input,\n  OnChanges,\n  SimpleChanges,\n} from \"@angular/core\";\nimport { Router } from \"@angular/router\";\n\n/**\n * Вспомогательная директива для storybook, которая позволяет задать изначальное состояние хранилища store\n * перед отображением stories\n */\n\n@Directive({\n  selector: \"[routerInit]\",\n})\nexport class RouterInitDirective implements OnChanges {\n  constructor(private router: Router) {}\n\n  @Input() routerInit: string;\n\n  ngOnChanges(changes: SimpleChanges) {\n    if (changes.routerInit && changes.routerInit.currentValue) {\n      this.router.navigateByUrl(changes.routerInit.currentValue);\n    }\n  }\n}\n\n@NgModule({\n  declarations: [RouterInitDirective],\n  exports: [RouterInitDirective],\n})\nexport class RoouterInitModule {}\n",
             "selector": "[routerInit]",
             "providers": [],
             "inputsClass": [
@@ -788,7 +738,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-af429790237912520cb6817f7dccad51",
+            "id": "component-AppComponent-50b4dc00fc52eca3de82a79bbf6751c3",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -813,7 +763,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})\nexport class AppComponent {\n\n  constructor() {}\n\n}\n",
+            "sourceCode": "import { Component } from \"@angular/core\";\n\n@Component({\n  selector: \"app-root\",\n  templateUrl: \"./app.component.html\",\n})\nexport class AppComponent {\n  constructor() {}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -825,11 +775,11 @@
                 "args": [],
                 "line": 7
             },
-            "templateData": "<router-outlet></router-outlet>"
+            "templateData": "<router-outlet></router-outlet>\n"
         },
         {
             "name": "FooterComponent",
-            "id": "component-FooterComponent-4ba53fd7702ab24d13b9217a3147be3b",
+            "id": "component-FooterComponent-c9a1371e9240fd2695bebe356f93ad70",
             "file": "src/app/todos/components/footer/footer.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -849,14 +799,14 @@
                     "name": "countTodos",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 14,
                     "type": "number"
                 },
                 {
                     "name": "currentFilter",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 15,
                     "type": "string"
                 }
             ],
@@ -869,7 +819,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 19,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -881,7 +831,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';\n\n@Component({\n  selector: 'app-footer',\n  templateUrl: './footer.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class FooterComponent implements OnInit {\n\n  @Input() countTodos: number;\n  @Input() currentFilter: string;\n\n  constructor() {\n  }\n\n  ngOnInit() {\n  }\n\n  // TODO:\n  // clearCompleted() {\n  //   const action = new TodoActions.ClearCompletedAction();\n  //   this.store.dispatch(action);\n  // }\n\n  // TODO\n  // completedAll() {\n  //   const action = new TodoActions.CompletedAllAction();\n  //   this.store.dispatch(action);\n  // }\n\n}\n",
+            "sourceCode": "import {\n  Component,\n  OnInit,\n  Input,\n  ChangeDetectionStrategy,\n} from \"@angular/core\";\n\n@Component({\n  selector: \"app-footer\",\n  templateUrl: \"./footer.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class FooterComponent implements OnInit {\n  @Input() countTodos: number;\n  @Input() currentFilter: string;\n\n  constructor() {}\n\n  ngOnInit() {}\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -891,16 +841,16 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 11
+                "line": 15
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<footer id=\"footer\" class=\"footer\">\n  <span id=\"todo-count\" class=\"todo-count\">{{ countTodos }} items left</span>\n  <ul id=\"filters\" class=\"filters\">\n    <li>\n      <a routerLink=\"/\" [class.selected]=\"currentFilter == 'all'\">\n        All\n      </a>\n    </li>\n    <li>\n      <a routerLink=\"/active\" [class.selected]=\"currentFilter == 'active'\">\n        Active\n      </a>\n    </li>\n    <li>\n      <a\n        routerLink=\"/completed\"\n        [class.selected]=\"currentFilter == 'completed'\"\n      >\n        Completed\n      </a>\n    </li>\n  </ul>\n  <!-- <button\n    id=\"clear-completed\"\n    class=\"clear-completed\"\n    (click)=\"clearCompleted()\"\n  >\n    Clear completed\n  </button> -->\n</footer>\n"
+            "templateData": "<footer id=\"footer\" class=\"footer\">\n  <span id=\"todo-count\" class=\"todo-count\">{{ countTodos }} items left</span>\n  <ul id=\"filters\" class=\"filters\">\n    <li>\n      <a routerLink=\"/\" [class.selected]=\"currentFilter === 'all'\"> All </a>\n    </li>\n    <li>\n      <a routerLink=\"/active\" [class.selected]=\"currentFilter === 'active'\">\n        Active\n      </a>\n    </li>\n    <li>\n      <a\n        routerLink=\"/completed\"\n        [class.selected]=\"currentFilter === 'completed'\"\n      >\n        Completed\n      </a>\n    </li>\n  </ul>\n</footer>\n"
         },
         {
             "name": "LayoutContainer",
-            "id": "component-LayoutContainer-2cbcbdfa9f783626d6da4dc6a5ae5d97",
+            "id": "component-LayoutContainer-95c7c11ecf85a7b38cb428bcba887dad",
             "file": "src/app/todos/containers/layout/layout.container.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -925,7 +875,7 @@
                     "type": "Observable<number>",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 17
                 },
                 {
                     "name": "filter$",
@@ -934,7 +884,7 @@
                     "type": "Observable<string>",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 18
                 }
             ],
             "methodsClass": [
@@ -944,7 +894,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -961,7 +911,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -984,371 +934,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';\nimport { Store, select } from '@ngrx/store';\n\nimport { TodosModuleState } from '@todos/states';\nimport { addTodoRequest } from '@todos/actions';\nimport { getCountVisibleTodos, getFilter } from '@todos/selectors';\nimport { Todo } from '@todos/models';\nimport { Observable } from 'rxjs';\n\n@Component({\n  selector: 'app-layout',\n  templateUrl: './layout.container.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\n// tslint:disable-next-line: component-class-suffix\nexport class LayoutContainer implements OnInit {\n\n  counter$: Observable<number>;\n  filter$: Observable<string>;\n\n  constructor(\n    private store: Store<TodosModuleState>,\n  ) {\n    this.counter$ = this.store.pipe(\n      select(getCountVisibleTodos)\n    );\n    this.filter$ = this.store.pipe(\n      select(getFilter)\n    );\n  }\n\n  ngOnInit() {\n  }\n\n  onSaveTodo(title: string) {\n    const todo: Todo = {\n      id: Math.floor(Math.random() * (300 - 200)) + 200,\n      title,\n      completed: false\n    };\n    const action = addTodoRequest({todo});\n    this.store.dispatch(action);\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "store",
-                        "type": "Store<TodosModuleState>",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 19,
-                "jsdoctags": [
-                    {
-                        "name": "store",
-                        "type": "Store<TodosModuleState>",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<section class=\"todoapp\">\n  <header class=\"header\">\n    <h1>todos</h1>\n    <app-new-todo (saveTodo)=\"onSaveTodo($event)\"></app-new-todo>\n  </header>\n  <app-todo-list></app-todo-list>\n  <app-footer\n    [countTodos]=\"counter$ | async\"\n    [currentFilter]=\"filter$ | async\"\n  ></app-footer>\n</section>\n<footer class=\"info\">\n  <p>Double-click to edit a todo</p>\n  <p>Written by <a href=\"http://twitter.com/nicobytes\">Nicolas Molina</a></p>\n  <p>\n    Using <a href=\"https://angular.io/\">Angular</a> and\n    <a href=\"https://ngrx.github.io/\">ngrx/store</a>\n  </p>\n  <p>Part of <a href=\"http://todomvc.com\">TodoMVC</a></p>\n</footer>\n"
-        },
-        {
-            "name": "NewTodoComponent",
-            "id": "component-NewTodoComponent-ece28cf147a894da880e63a0e698bbaa",
-            "file": "src/app/todos/components/new-todo/new-todo.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-new-todo",
-            "styleUrls": [],
-            "styles": [],
-            "templateUrl": [
-                "./new-todo.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [
-                {
-                    "name": "saveTodo",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "EventEmitter<string>"
-                }
-            ],
-            "propertiesClass": [
-                {
-                    "name": "textField",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "FormControl",
-                    "optional": false,
-                    "description": "",
-                    "line": 13
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "addTodo",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 24,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 21,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\nimport { CustomValidators } from '@utils/validators';\n\n@Component({\n  selector: 'app-new-todo',\n  templateUrl: './new-todo.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NewTodoComponent implements OnInit {\n\n  textField: FormControl;\n\n  @Output() saveTodo: EventEmitter<string> = new EventEmitter();\n\n  constructor() {\n    this.textField = new FormControl('', [Validators.required, CustomValidators.isBlank]);\n  }\n\n  ngOnInit() {\n  }\n\n  addTodo() {\n    if (this.textField.valid) {\n      const text: string = this.textField.value;\n      this.textField.setValue('', { emitEvent: false });\n      this.saveTodo.emit(text);\n    }\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 15
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<input \n  id=\"new-todo\" \n  class=\"new-todo\" \n  type=\"text\" \n  autofocus \n  (keyup.enter)=\"addTodo()\"\n  placeholder=\"What needs to be done?\"\n  [formControl]=\"textField\" />\n    \n"
-        },
-        {
-            "name": "TodoComponent",
-            "id": "component-TodoComponent-3355accef2e6e7e9fc069efca29afcc2",
-            "file": "src/app/todos/components/todo/todo.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-todo",
-            "styleUrls": [],
-            "styles": [],
-            "templateUrl": [
-                "./todo.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "todo",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 18,
-                    "type": ""
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "delete",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 29,
-                    "type": "EventEmitter<number>"
-                },
-                {
-                    "name": "update",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 28,
-                    "type": "EventEmitter<Update<Todo>>"
-                }
-            ],
-            "propertiesClass": [
-                {
-                    "name": "_todo",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Todo",
-                    "optional": false,
-                    "description": "",
-                    "line": 15
-                },
-                {
-                    "name": "checkField",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "FormControl",
-                    "optional": false,
-                    "description": "",
-                    "line": 25
-                },
-                {
-                    "name": "editing",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "boolean",
-                    "optional": false,
-                    "description": "",
-                    "line": 26
-                },
-                {
-                    "name": "textField",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "FormControl",
-                    "optional": false,
-                    "description": "",
-                    "line": 24
-                },
-                {
-                    "name": "textInput",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "ElementRef",
-                    "optional": false,
-                    "description": "",
-                    "line": 23,
-                    "decorators": [
-                        {
-                            "name": "ViewChild",
-                            "stringifiedArguments": "'textInput', {static: true}"
-                        }
-                    ]
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "activeEditMode",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 62,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "deleteTodo",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 69,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 46,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "updateText",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 49,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\nimport { Update } from '@ngrx/entity';\n\nimport { Todo } from '@todos/models';\nimport { CustomValidators } from '@app/utils/validators';\n\n@Component({\n  selector: 'app-todo',\n  templateUrl: './todo.component.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class TodoComponent implements OnInit {\n\n  _todo: Todo;\n\n  @Input()\n  set todo(todo: Todo) {\n    this._todo = todo;\n    this.textField.setValue(this._todo.title);\n    this.checkField.setValue(this._todo.completed, {emitEvent: false});\n  }\n  @ViewChild('textInput', { static: true }) textInput: ElementRef;\n  textField: FormControl;\n  checkField: FormControl;\n  editing: boolean;\n\n  @Output() update: EventEmitter<Update<Todo>> = new EventEmitter();\n  @Output() delete: EventEmitter<number> = new EventEmitter();\n\n  constructor() {\n    this.textField = new FormControl('', [Validators.required, CustomValidators.isBlank]);\n    this.checkField = new FormControl(false);\n    this.checkField.valueChanges\n    .subscribe(state => {\n      const update = {\n        id: this._todo.id,\n        changes: {\n          completed: state\n        }\n      };\n      this.update.emit(update);\n    });\n  }\n\n  ngOnInit() {\n  }\n\n  updateText() {\n    if (this.textField.valid && this.editing) {\n      const update = {\n        id: this._todo.id,\n        changes: {\n          title: this.textField.value\n        }\n      };\n      this.update.emit(update);\n      this.editing = false;\n    }\n  }\n\n  activeEditMode() {\n    this.editing = true;\n    setTimeout(() => {\n      this.textInput.nativeElement.focus();\n    });\n  }\n\n  deleteTodo() {\n    this.delete.emit(this._todo.id);\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 29
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "accessors": {
-                "todo": {
-                    "name": "todo",
-                    "setSignature": {
-                        "name": "todo",
-                        "type": "void",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "args": [
-                            {
-                                "name": "todo",
-                                "type": "Todo",
-                                "deprecated": false,
-                                "deprecationMessage": ""
-                            }
-                        ],
-                        "returnType": "void",
-                        "line": 18,
-                        "jsdoctags": [
-                            {
-                                "name": "todo",
-                                "type": "Todo",
-                                "deprecated": false,
-                                "deprecationMessage": "",
-                                "tagName": {
-                                    "text": "param"
-                                }
-                            }
-                        ]
-                    }
-                }
-            },
-            "templateData": "<li [class.completed]=\"_todo.completed\" [class.editing]=\"editing\">\n  <div class=\"view\">\n    <input\n    class=\"toggle\"\n    type=\"checkbox\"\n    [formControl]=\"checkField\"/>\n    <label\n      (dblclick)=\"activeEditMode()\">\n      {{ _todo.title }}\n    </label>\n    <a class=\"detail\" [routerLink]=\"['/detail', _todo.id]\">></a>\n    <button class=\"destroy\" (click)=\"deleteTodo()\"></button>\n  </div>\n  <input\n    class=\"edit\"\n    type=\"text\"\n    #textInput\n    (keyup.enter)=\"updateText()\"\n    (blur)=\"updateText()\"\n    [formControl]=\"textField\"\n    [hidden]=\"editing\" />\n</li>"
-        },
-        {
-            "name": "TodoDetailContainer",
-            "id": "component-TodoDetailContainer-e13c4a492756a1cc6cb97aa7a516f06a",
-            "file": "src/app/todos/containers/todo-detail/todo-detail.container.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-todo-detail",
-            "styleUrls": [],
-            "styles": [],
-            "templateUrl": [
-                "./todo-detail.container.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "todo$",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Observable<Todo>",
-                    "optional": false,
-                    "description": "",
-                    "line": 18
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 29,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';\nimport { Store, select } from '@ngrx/store';\n\nimport { TodosModuleState } from '@todos/states';\nimport { getTodo } from '@todos/selectors';\nimport { Todo } from '@todos/models';\nimport { Observable } from 'rxjs';\nimport { filter } from 'rxjs/operators';\n\n@Component({\n  selector: 'app-todo-detail',\n  templateUrl: './todo-detail.container.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\n// tslint:disable-next-line: component-class-suffix\nexport class TodoDetailContainer implements OnInit {\n\n  todo$: Observable<Todo>;\n\n  constructor(\n    private store: Store<TodosModuleState>\n  ) {\n    this.todo$ = this.store.pipe(\n      select(getTodo),\n      filter(todo => todo !== null)\n    );\n  }\n\n  ngOnInit() {\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit, ChangeDetectionStrategy } from \"@angular/core\";\nimport { Store, select } from \"@ngrx/store\";\n\nimport { TodosModuleState } from \"@todos/states\";\nimport { addTodoRequest } from \"@todos/actions\";\nimport { getCountVisibleTodos, getFilter } from \"@todos/selectors\";\nimport { Todo } from \"@todos/models\";\nimport { Observable } from \"rxjs\";\n\n@Component({\n  selector: \"app-layout\",\n  templateUrl: \"./layout.container.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\n// tslint:disable-next-line: component-class-suffix\nexport class LayoutContainer implements OnInit {\n  counter$: Observable<number>;\n  filter$: Observable<string>;\n\n  constructor(private store: Store<TodosModuleState>) {\n    this.counter$ = this.store.pipe(select(getCountVisibleTodos));\n    this.filter$ = this.store.pipe(select(getFilter));\n  }\n\n  ngOnInit() {}\n\n  onSaveTodo(title: string) {\n    const todo: Todo = {\n      id: Math.floor(Math.random() * (300 - 200)) + 200,\n      title,\n      completed: false,\n    };\n    const action = addTodoRequest({ todo });\n    this.store.dispatch(action);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1381,11 +967,375 @@
             "implements": [
                 "OnInit"
             ],
+            "templateData": "<section class=\"todoapp\">\n  <header class=\"header\">\n    <h1>todos</h1>\n    <app-new-todo (saveTodo)=\"onSaveTodo($event)\"></app-new-todo>\n  </header>\n  <app-todo-list></app-todo-list>\n  <app-footer\n    [countTodos]=\"counter$ | async\"\n    [currentFilter]=\"filter$ | async\"\n  ></app-footer>\n</section>\n<footer class=\"info\">\n  <p>Double-click to edit a todo</p>\n  <p>Written by <a href=\"http://twitter.com/nicobytes\">Nicolas Molina</a></p>\n  <p>\n    Using <a href=\"https://angular.io/\">Angular</a> and\n    <a href=\"https://ngrx.github.io/\">ngrx/store</a>\n  </p>\n  <p>Part of <a href=\"http://todomvc.com\">TodoMVC</a></p>\n</footer>\n"
+        },
+        {
+            "name": "NewTodoComponent",
+            "id": "component-NewTodoComponent-b655a20b185a821f30e4d3c01e3d6c75",
+            "file": "src/app/todos/components/new-todo/new-todo.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-new-todo",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./new-todo.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "saveTodo",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "EventEmitter<string>"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "textField",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormControl",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "addTodo",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\n  Component,\n  OnInit,\n  Output,\n  EventEmitter,\n  ChangeDetectionStrategy,\n} from \"@angular/core\";\nimport { FormControl, Validators } from \"@angular/forms\";\n\nimport { CustomValidators } from \"@utils/validators\";\n\n@Component({\n  selector: \"app-new-todo\",\n  templateUrl: \"./new-todo.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NewTodoComponent implements OnInit {\n  textField: FormControl;\n\n  @Output() saveTodo: EventEmitter<string> = new EventEmitter();\n\n  constructor() {\n    this.textField = new FormControl(\"\", [\n      Validators.required,\n      CustomValidators.isBlank,\n    ]);\n  }\n\n  ngOnInit() {}\n\n  addTodo() {\n    if (this.textField.valid) {\n      const text: string = this.textField.value;\n      this.textField.setValue(\"\", { emitEvent: false });\n      this.saveTodo.emit(text);\n    }\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 20
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<input\n  id=\"new-todo\"\n  class=\"new-todo\"\n  type=\"text\"\n  autofocus\n  (keyup.enter)=\"addTodo()\"\n  placeholder=\"What needs to be done?\"\n  [formControl]=\"textField\"\n/>\n"
+        },
+        {
+            "name": "TodoComponent",
+            "id": "component-TodoComponent-13180476c1f8d778d2e76bd48a11d96d",
+            "file": "src/app/todos/components/todo/todo.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-todo",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./todo.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "todo",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": ""
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "delete",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "EventEmitter<number>"
+                },
+                {
+                    "name": "update",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "EventEmitter<Update<Todo>>"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "_todo",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Todo",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "checkField",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormControl",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
+                },
+                {
+                    "name": "editing",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 34
+                },
+                {
+                    "name": "textField",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormControl",
+                    "optional": false,
+                    "description": "",
+                    "line": 32
+                },
+                {
+                    "name": "textInput",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 31,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'textInput', {static: true}"
+                        }
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "activeEditMode",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "deleteTodo",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 78,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 56,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateText",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 58,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\n  Component,\n  OnInit,\n  Input,\n  ViewChild,\n  Output,\n  EventEmitter,\n  ElementRef,\n  ChangeDetectionStrategy,\n} from \"@angular/core\";\nimport { FormControl, Validators } from \"@angular/forms\";\nimport { Update } from \"@ngrx/entity\";\n\nimport { Todo } from \"@todos/models\";\nimport { CustomValidators } from \"@app/utils/validators\";\n\n@Component({\n  selector: \"app-todo\",\n  templateUrl: \"./todo.component.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class TodoComponent implements OnInit {\n  _todo: Todo;\n\n  @Input()\n  set todo(todo: Todo) {\n    this._todo = todo;\n    this.textField.setValue(this._todo.title);\n    this.checkField.setValue(this._todo.completed, { emitEvent: false });\n  }\n  @ViewChild(\"textInput\", { static: true }) textInput: ElementRef;\n  textField: FormControl;\n  checkField: FormControl;\n  editing: boolean;\n\n  @Output() update: EventEmitter<Update<Todo>> = new EventEmitter();\n  @Output() delete: EventEmitter<number> = new EventEmitter();\n\n  constructor() {\n    this.textField = new FormControl(\"\", [\n      Validators.required,\n      CustomValidators.isBlank,\n    ]);\n    this.checkField = new FormControl(false);\n    this.checkField.valueChanges.subscribe((state) => {\n      const update = {\n        id: this._todo.id,\n        changes: {\n          completed: state,\n        },\n      };\n      this.update.emit(update);\n    });\n  }\n\n  ngOnInit() {}\n\n  updateText() {\n    if (this.textField.valid && this.editing) {\n      const update = {\n        id: this._todo.id,\n        changes: {\n          title: this.textField.value,\n        },\n      };\n      this.update.emit(update);\n      this.editing = false;\n    }\n  }\n\n  activeEditMode() {\n    this.editing = true;\n    setTimeout(() => {\n      this.textInput.nativeElement.focus();\n    });\n  }\n\n  deleteTodo() {\n    this.delete.emit(this._todo.id);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 37
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "accessors": {
+                "todo": {
+                    "name": "todo",
+                    "setSignature": {
+                        "name": "todo",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "todo",
+                                "type": "Todo",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 26,
+                        "jsdoctags": [
+                            {
+                                "name": "todo",
+                                "type": "Todo",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "templateData": "<li [class.completed]=\"_todo.completed\" [class.editing]=\"editing\">\n  <div class=\"view\">\n    <input class=\"toggle\" type=\"checkbox\" [formControl]=\"checkField\" />\n    <label (dblclick)=\"activeEditMode()\">\n      {{ _todo.title }}\n    </label>\n    <a class=\"detail\" [routerLink]=\"['/detail', _todo.id]\">></a>\n    <button class=\"destroy\" (click)=\"deleteTodo()\"></button>\n  </div>\n  <input\n    class=\"edit\"\n    type=\"text\"\n    #textInput\n    (keyup.enter)=\"updateText()\"\n    (blur)=\"updateText()\"\n    [formControl]=\"textField\"\n    [hidden]=\"editing\"\n  />\n</li>\n"
+        },
+        {
+            "name": "TodoDetailContainer",
+            "id": "component-TodoDetailContainer-8602c1325b163667e9624be4bfcf6c1b",
+            "file": "src/app/todos/containers/todo-detail/todo-detail.container.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-todo-detail",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./todo-detail.container.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "todo$",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<Todo>",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit, ChangeDetectionStrategy } from \"@angular/core\";\nimport { Store, select } from \"@ngrx/store\";\nimport { Observable } from \"rxjs\";\nimport { filter } from \"rxjs/operators\";\n\nimport { TodosModuleState } from \"@todos/states\";\nimport { getTodo } from \"@todos/selectors\";\nimport { Todo } from \"@todos/models\";\n\n@Component({\n  selector: \"app-todo-detail\",\n  templateUrl: \"./todo-detail.container.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\n// tslint:disable-next-line: component-class-suffix\nexport class TodoDetailContainer implements OnInit {\n  todo$: Observable<Todo>;\n\n  constructor(private store: Store<TodosModuleState>) {\n    this.todo$ = this.store.pipe(\n      select(getTodo),\n      filter((todo) => todo !== null)\n    );\n  }\n\n  ngOnInit() {}\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "store",
+                        "type": "Store<TodosModuleState>",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 17,
+                "jsdoctags": [
+                    {
+                        "name": "store",
+                        "type": "Store<TodosModuleState>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
             "templateData": "<section id=\"main\" class=\"main\" *ngIf=\"todo$ | async as todo\">\n  <h1>{{ todo.title }}</h1>\n  <p>{{ todo.completed }}</p>\n</section>\n"
         },
         {
             "name": "TodoListContainer",
-            "id": "component-TodoListContainer-8688b13dd0d0997bc328f1b8c0be1c8a",
+            "id": "component-TodoListContainer-baef44e923538b99a5faf0f989427bc2",
             "file": "src/app/todos/containers/todo-list/todo-list.container.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1410,7 +1360,7 @@
                     "type": "FormControl",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 19
                 },
                 {
                     "name": "todos$",
@@ -1419,7 +1369,7 @@
                     "type": "Observable<Todo[]>",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 18
                 }
             ],
             "methodsClass": [
@@ -1429,7 +1379,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 26,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1446,7 +1396,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1474,7 +1424,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 40,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1497,7 +1447,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';\nimport { FormControl } from '@angular/forms';\nimport { Store, select } from '@ngrx/store';\nimport { Update } from '@ngrx/entity';\n\nimport { TodosModuleState } from '@todos/states';\nimport { deleteTodoRequest, updateTodoRequest } from '@todos/actions';\nimport { getVisibleTodos } from '@todos/selectors';\nimport { Todo } from '@todos/models';\nimport { Observable } from 'rxjs';\n\n@Component({\n  selector: 'app-todo-list',\n  templateUrl: './todo-list.container.html',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\n// tslint:disable-next-line: component-class-suffix\nexport class TodoListContainer implements OnInit {\n\n  todos$: Observable<Todo[]>;\n  checkField: FormControl;\n\n  constructor(\n    private store: Store<TodosModuleState>,\n  ) {\n    this.checkField = new FormControl(false);\n    this.todos$ = this.store.pipe(\n      select(getVisibleTodos)\n    );\n  }\n\n  ngOnInit() {\n  }\n\n  // TODO\n  // toggleAll() {\n  //  this.store.dispatch(new TodoActions.CompletedAllAction());\n  // }\n\n  onUpdate(update: Update<Todo>) {\n    const action = updateTodoRequest({update});\n    this.store.dispatch(action);\n  }\n\n  onDelete(id: number) {\n    const action = deleteTodoRequest({id});\n    this.store.dispatch(action);\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit, ChangeDetectionStrategy } from \"@angular/core\";\nimport { FormControl } from \"@angular/forms\";\nimport { Store, select } from \"@ngrx/store\";\nimport { Update } from \"@ngrx/entity\";\nimport { Observable } from \"rxjs\";\n\nimport { TodosModuleState } from \"@todos/states\";\nimport { deleteTodoRequest, updateTodoRequest } from \"@todos/actions\";\nimport { getVisibleTodos } from \"@todos/selectors\";\nimport { Todo } from \"@todos/models\";\n\n@Component({\n  selector: \"app-todo-list\",\n  templateUrl: \"./todo-list.container.html\",\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class TodoListContainer implements OnInit {\n  todos$: Observable<Todo[]>;\n  checkField: FormControl;\n\n  constructor(private store: Store<TodosModuleState>) {\n    this.checkField = new FormControl(false);\n    this.todos$ = this.store.pipe(select(getVisibleTodos));\n  }\n\n  ngOnInit() {}\n\n  onUpdate(update: Update<Todo>) {\n    const action = updateTodoRequest({ update });\n    this.store.dispatch(action);\n  }\n\n  onDelete(id: number) {\n    const action = deleteTodoRequest({ id });\n    this.store.dispatch(action);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1514,7 +1464,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 21,
+                "line": 19,
                 "jsdoctags": [
                     {
                         "name": "store",
@@ -1530,7 +1480,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<section id=\"main\" class=\"main\" *ngIf=\"todos$ | async as todos\">\n  <!-- <div class=\"toogle-view\" *ngIf=\"todos.length > 0\">\n    <input\n      id=\"toggle-all\"\n      class=\"toggle-all\"\n      type=\"checkbox\"\n      [formControl]=\"checkField\"\n    />\n    <label (click)=\"toggleAll()\">Mark all as complete</label>\n  </div> -->\n  <ul id=\"todo-list\" class=\"todo-list\">\n    <app-todo\n      (update)=\"onUpdate($event)\"\n      (delete)=\"onDelete($event)\"\n      [todo]=\"todo\"\n      *ngFor=\"let todo of todos\"\n    ></app-todo>\n  </ul>\n</section>\n"
+            "templateData": "<section id=\"main\" class=\"main\" *ngIf=\"todos$ | async as todos\">\n  <ul id=\"todo-list\" class=\"todo-list\">\n    <app-todo\n      (update)=\"onUpdate($event)\"\n      (delete)=\"onDelete($event)\"\n      [todo]=\"todo\"\n      *ngFor=\"let todo of todos\"\n    ></app-todo>\n  </ul>\n</section>\n"
         }
     ],
     "modules": [
@@ -1587,13 +1537,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-d7700210495d70c26e51309adb561c45",
+            "id": "module-AppRoutingModule-ebf1499761ee54fa968bf5c7cce9940f",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { Routes, RouterModule, PreloadAllModules } from '@angular/router';\n\nexport const routes: Routes = [\n  {\n    path: '',\n    loadChildren: () => \"import('./todos/todos.module').then(m => m.TodosModule)\"\n  },\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes, {\n    preloadingStrategy: PreloadAllModules,\n    relativeLinkResolution: 'legacy'\n})],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\";\nimport { Routes, RouterModule, PreloadAllModules } from \"@angular/router\";\n\nexport const routes: Routes = [\n  {\n    path: \"\",\n    loadChildren: () =>\n      \"import(\\\"./todos/todos.module\\\").then((m) => m.TodosModule)\",\n  },\n];\n\n@NgModule({\n  imports: [\n    RouterModule.forRoot(routes, {\n      preloadingStrategy: PreloadAllModules,\n      relativeLinkResolution: \"legacy\",\n    }),\n  ],\n  exports: [RouterModule],\n})\nexport class AppRoutingModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -1659,13 +1609,13 @@
         },
         {
             "name": "RoouterInitModule",
-            "id": "module-RoouterInitModule-fe4053f01a30e5f04fd9a2721c92d2b7",
+            "id": "module-RoouterInitModule-81e0895662970822632288a0953038a9",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/stories/directives/init-router.directive.ts",
             "methods": [],
-            "sourceCode": "import {\n  NgModule,\n  Directive,\n  Input,\n  OnChanges,\n  SimpleChanges,\n} from \"@angular/core\";\nimport { Router } from \"@angular/router\";\n\n/**\n * Вспомогательная директива для storybook, которая позволяет задать изначальное состояние хранилища store\n * перед отображением stories\n */\n\n@Directive({\n  selector: \"[routerInit]\",\n})\nexport class RouterInitDirective implements OnChanges {\n  constructor(private router: Router) {}\n\n  @Input() routerInit: string;\n\n  ngOnChanges(changes: SimpleChanges) {\n    debugger;\n    if (changes.routerInit && changes.routerInit.currentValue) {\n      this.router.navigateByUrl(changes.routerInit.currentValue);\n    }\n  }\n}\n\n@NgModule({\n  declarations: [RouterInitDirective],\n  exports: [RouterInitDirective],\n})\nexport class RoouterInitModule {}\n",
+            "sourceCode": "import {\n  NgModule,\n  Directive,\n  Input,\n  OnChanges,\n  SimpleChanges,\n} from \"@angular/core\";\nimport { Router } from \"@angular/router\";\n\n/**\n * Вспомогательная директива для storybook, которая позволяет задать изначальное состояние хранилища store\n * перед отображением stories\n */\n\n@Directive({\n  selector: \"[routerInit]\",\n})\nexport class RouterInitDirective implements OnChanges {\n  constructor(private router: Router) {}\n\n  @Input() routerInit: string;\n\n  ngOnChanges(changes: SimpleChanges) {\n    if (changes.routerInit && changes.routerInit.currentValue) {\n      this.router.navigateByUrl(changes.routerInit.currentValue);\n    }\n  }\n}\n\n@NgModule({\n  declarations: [RouterInitDirective],\n  exports: [RouterInitDirective],\n})\nexport class RoouterInitModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -1751,13 +1701,13 @@
         },
         {
             "name": "TodosRoutingModule",
-            "id": "module-TodosRoutingModule-663292593957c010d35cae56935b314d",
+            "id": "module-TodosRoutingModule-9fa5feb9e49058879a0211190fa39f01",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/todos/todos-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { Routes, RouterModule } from '@angular/router';\n\nimport { LayoutContainer } from './containers/layout/layout.container';\nimport { TodoDetailContainer } from './containers/todo-detail/todo-detail.container';\nimport { TodosGuard } from '@todos/guards/todos.guard';\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: LayoutContainer,\n    canActivate: [ TodosGuard ]\n  },\n  {\n    path: ':filter',\n    component: LayoutContainer,\n    canActivate: [ TodosGuard ]\n  },\n  {\n    path: 'detail/:id',\n    component: TodoDetailContainer,\n  }\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class TodosRoutingModule { }\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\";\nimport { Routes, RouterModule } from \"@angular/router\";\n\nimport { LayoutContainer } from \"./containers/layout/layout.container\";\nimport { TodoDetailContainer } from \"./containers/todo-detail/todo-detail.container\";\nimport { TodosGuard } from \"@todos/guards/todos.guard\";\n\nconst routes: Routes = [\n  {\n    path: \"\",\n    component: LayoutContainer,\n    canActivate: [TodosGuard],\n  },\n  {\n    path: \":filter\",\n    component: LayoutContainer,\n    canActivate: [TodosGuard],\n  },\n  {\n    path: \"detail/:id\",\n    component: TodoDetailContainer,\n  },\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule],\n})\nexport class TodosRoutingModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -1805,7 +1755,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] AddTodo',\n  props<{todo: Todo}>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] AddTodo\",\n  props<{ todo: Todo }>()\n)"
             },
             {
                 "name": "addTodoFail",
@@ -1815,7 +1765,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] AddTodoFail',\n  props<{ error: string }>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] AddTodoFail\",\n  props<{ error: string }>()\n)"
             },
             {
                 "name": "addTodoRequest",
@@ -1825,7 +1775,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] AddTodoRequest',\n  props<{ todo: Todo }>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] AddTodoRequest\",\n  props<{ todo: Todo }>()\n)"
             },
             {
                 "name": "addTodoSuccess",
@@ -1835,7 +1785,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] AddTodoSuccess',\n)"
+                "defaultValue": "createAction(\"[TodoModule] AddTodoSuccess\")"
             },
             {
                 "name": "Basic",
@@ -1875,7 +1825,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  FooterComponent,\n  NewTodoComponent,\n  TodoComponent\n]"
+                "defaultValue": "[FooterComponent, NewTodoComponent, TodoComponent]"
             },
             {
                 "name": "CONTAINERS",
@@ -1885,7 +1835,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  LayoutContainer,\n  TodoListContainer,\n  TodoDetailContainer\n]"
+                "defaultValue": "[\n  LayoutContainer,\n  TodoListContainer,\n  TodoDetailContainer,\n]"
             },
             {
                 "name": "context",
@@ -1895,7 +1845,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                "defaultValue": "require.context(\"./\", true, /\\.spec\\.ts$/)"
             },
             {
                 "name": "deleteTodo",
@@ -1905,7 +1855,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] DeleteTodo',\n  props<{id: number}>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] DeleteTodo\",\n  props<{ id: number }>()\n)"
             },
             {
                 "name": "deleteTodoFail",
@@ -1915,7 +1865,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] DeleteTodoFail',\n  props<{ error: string }>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] DeleteTodoFail\",\n  props<{ error: string }>()\n)"
             },
             {
                 "name": "deleteTodoRequest",
@@ -1925,7 +1875,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] DeleteTodoRequest',\n  props<{ id: number }>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] DeleteTodoRequest\",\n  props<{ id: number }>()\n)"
             },
             {
                 "name": "deleteTodoSuccess",
@@ -1935,7 +1885,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] DeleteTodoSuccess'\n)"
+                "defaultValue": "createAction(\"[TodoModule] DeleteTodoSuccess\")"
             },
             {
                 "name": "EFFECTS",
@@ -1945,7 +1895,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "any[]",
-                "defaultValue": "[\n  TodosEffects\n]"
+                "defaultValue": "[TodosEffects]"
             },
             {
                 "name": "environment",
@@ -1955,7 +1905,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  production: true,\n  api: 'https://jsonplaceholder.typicode.com'\n}"
+                "defaultValue": "{\n  production: true,\n  api: \"https://jsonplaceholder.typicode.com\",\n}"
             },
             {
                 "name": "environment",
@@ -1965,7 +1915,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  production: false,\n  api: 'https://jsonplaceholder.typicode.com'\n}"
+                "defaultValue": "{\n  production: false,\n  api: \"https://jsonplaceholder.typicode.com\",\n}"
             },
             {
                 "name": "getCountVisibleTodos",
@@ -1985,7 +1935,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createSelector(\n  getRouterState,\n  (router) => {\n    if (router && router.state && router.state.params.filter) {\n      const filter = router.state.params.filter;\n      switch (filter) {\n        default:\n          return 'all';\n        case 'completed':\n          return 'completed';\n        case 'active':\n          return 'active';\n      }\n    }\n    return 'all';\n  }\n)"
+                "defaultValue": "createSelector(getRouterState, (router) => {\n  if (router && router.state && router.state.params.filter) {\n    const filter = router.state.params.filter;\n    switch (filter) {\n      default:\n        return \"all\";\n      case \"completed\":\n        return \"completed\";\n      case \"active\":\n        return \"active\";\n    }\n  }\n  return \"all\";\n})"
+            },
+            {
+                "name": "getGraphqlQueryInfo",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": ".storybook/cypress-utils/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(\n  request: MockedRequest<GraphQLRequestBody<Record<string, any>>>\n): GraphqlQueryMetadata | null => {\n  const queryMetadata = parse(request.body?.query);\n  const queryDefinition = queryMetadata.definitions[0];\n\n  if (\n    !queryDefinition ||\n    queryDefinition.kind !== \"OperationDefinition\" ||\n    !queryDefinition.name\n  ) {\n    return null;\n  }\n\n  const {\n    operation,\n    name: { value: operationName },\n  } = queryDefinition;\n\n  return { operation, operationName };\n}"
             },
             {
                 "name": "geTodosState",
@@ -1995,7 +1955,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createSelector(\n  getTodosModuleState,\n  state => state.todos\n)"
+                "defaultValue": "createSelector(\n  getTodosModuleState,\n  (state) => state.todos\n)"
             },
             {
                 "name": "getRouterState",
@@ -2005,7 +1965,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createFeatureSelector<\n  RouterReducerState<RouterStateUrl>\n>(\"router\")"
+                "defaultValue": "createFeatureSelector<RouterReducerState<RouterStateUrl>>(\"router\")"
             },
             {
                 "name": "getTodo",
@@ -2025,7 +1985,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createFeatureSelector<TodosModuleState>(\n  'todos-module'\n)"
+                "defaultValue": "createFeatureSelector<TodosModuleState>(\"todos-module\")"
             },
             {
                 "name": "getVisibleTodos",
@@ -2035,7 +1995,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createSelector(\n  getAllTodos,\n  getRouterState,\n  (todos, router) => {\n    if (router?.state?.params) {\n      const filter = router.state.params.filter;\n        switch (filter) {\n          default:\n            return todos;\n          case 'completed':\n            return todos.filter(t => t.completed);\n          case 'active':\n            return todos.filter(t => !t.completed);\n        }\n    }\n    return todos;\n  }\n)"
+                "defaultValue": "createSelector(\n  getAllTodos,\n  getRouterState,\n  (todos, router) => {\n    if (router?.state?.params) {\n      const filter = router.state.params.filter;\n      switch (filter) {\n        default:\n          return todos;\n        case \"completed\":\n          return todos.filter((t) => t.completed);\n        case \"active\":\n          return todos.filter((t) => !t.completed);\n      }\n    }\n    return todos;\n  }\n)"
             },
             {
                 "name": "GUARDS",
@@ -2045,7 +2005,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "any[]",
-                "defaultValue": "[\n  TodosGuard\n]"
+                "defaultValue": "[TodosGuard]"
             },
             {
                 "name": "initialState",
@@ -2068,6 +2028,16 @@
                 "defaultValue": "todosAdapter.getInitialState({\n  // additional entity state properties\n})"
             },
             {
+                "name": "isGraphqlRequest",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": ".storybook/cypress-utils/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(\n  request: MockedRequest\n): request is MockedRequest<GraphQLRequestBody<Record<string, any>>> => {\n  const { body } = request;\n  if (!body || typeof body === \"string\") {\n    return false;\n  }\n\n  return request.method === \"POST\" && \"variables\" in body && \"query\" in body;\n}"
+            },
+            {
                 "name": "loadTodos",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2075,7 +2045,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] LoadTodos',\n  props<{todos: Todo[]}>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] LoadTodos\",\n  props<{ todos: Todo[] }>()\n)"
             },
             {
                 "name": "loadTodosFail",
@@ -2085,7 +2055,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] LoadTodosFail',\n  props<{ error: string }>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] LoadTodosFail\",\n  props<{ error: string }>()\n)"
             },
             {
                 "name": "loadTodosRequest",
@@ -2095,7 +2065,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] LoadTodosRequest'\n)"
+                "defaultValue": "createAction(\"[TodoModule] LoadTodosRequest\")"
             },
             {
                 "name": "loadTodosSuccess",
@@ -2105,7 +2075,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] LoadTodosSuccess'\n)"
+                "defaultValue": "createAction(\"[TodoModule] LoadTodosSuccess\")"
+            },
+            {
+                "name": "makeUniqueKey",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": ".storybook/cypress-utils/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(request: MockedRequest): string => {\n  if (isGraphqlRequest(request)) {\n    const metadata = getGraphqlQueryInfo(request);\n    if (metadata) {\n      return `${metadata.operation}:${metadata.operationName}`;\n    }\n  }\n  return `${request.method}:${request.url.toString()}`;\n}"
             },
             {
                 "name": "metaReducers",
@@ -2145,7 +2125,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ActionReducerMap<TodosModuleState>",
-                "defaultValue": "{\n  todos: todosReducer,\n  todosUI: todosUIReducer\n}"
+                "defaultValue": "{\n  todos: todosReducer,\n  todosUI: todosUIReducer,\n}"
+            },
+            {
+                "name": "requestKey",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": ".storybook/cypress-utils/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(\n  routes: Set<string>,\n  request: MockedRequest\n): string | undefined => {\n  return Array.from(routes).find((r) => {\n    const [type, routeOrOperation] = r.split(/:(.+)/);\n\n    if (isGraphqlRequest(request)) {\n      const metadata = getGraphqlQueryInfo(request);\n      if (!metadata) {\n        return false;\n      }\n\n      const { operation, operationName } = metadata;\n      return operation === type && operationName === routeOrOperation;\n    }\n\n    const routeMatched = match(routeOrOperation, request.url.toString());\n    return request.method === type && routeMatched.matches;\n  });\n}"
             },
             {
                 "name": "require",
@@ -2164,7 +2154,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "any[]",
-                "defaultValue": "[\n  TodosService\n]"
+                "defaultValue": "[TodosService]"
             },
             {
                 "name": "Template",
@@ -2214,7 +2204,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createReducer(\n  initialState,\n  on(TodoActions.loadTodos, (state, {todos}) => {\n    return todosAdapter.setAll(todos, state);\n  }),\n  on(TodoActions.addTodo, (state, {todo}) => {\n    return todosAdapter.addOne(todo, state);\n  }),\n  on(TodoActions.updateTodo, (state, {update}) => {\n    return todosAdapter.updateOne(update, state);\n  }),\n  on(TodoActions.deleteTodo, (state, {id}) => {\n    return todosAdapter.removeOne(id, state);\n  }),\n)"
+                "defaultValue": "createReducer(\n  initialState,\n  on(TodoActions.loadTodos, (state, { todos }) => {\n    return todosAdapter.setAll(todos, state);\n  }),\n  on(TodoActions.addTodo, (state, { todo }) => {\n    return todosAdapter.addOne(todo, state);\n  }),\n  on(TodoActions.updateTodo, (state, { update }) => {\n    return todosAdapter.updateOne(update, state);\n  }),\n  on(TodoActions.deleteTodo, (state, { id }) => {\n    return todosAdapter.removeOne(id, state);\n  })\n)"
             },
             {
                 "name": "todosUIReducer",
@@ -2224,7 +2214,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createReducer(\n  initialState,\n  on(TodoUIActions.loadTodosRequest, (state) => {\n    return {\n      ...state,\n      loadingTodos: true,\n      errorLoadingTodos: null\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: null\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: error || null\n    };\n  }),\n  on(TodoUIActions.addTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: true,\n      errorAddTodo: null\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: null\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: error || null\n    };\n  }),\n  on(TodoUIActions.updateTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: true,\n      errorUpdateTodo: null\n    };\n  }),\n  on(TodoUIActions.updateTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: null\n    };\n  }),\n  on(TodoUIActions.addTodoFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: error || null\n    };\n  }),\n  on(TodoUIActions.deleteTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: true,\n      errorDeleteTodo: null\n    };\n  }),\n  on(TodoUIActions.deleteTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: null\n    };\n  }),\n  on(TodoUIActions.deleteTodoFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: error || null\n    };\n  }),\n)"
+                "defaultValue": "createReducer(\n  initialState,\n  on(TodoUIActions.loadTodosRequest, (state) => {\n    return {\n      ...state,\n      loadingTodos: true,\n      errorLoadingTodos: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: error || null,\n    };\n  }),\n  on(TodoUIActions.addTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: true,\n      errorAddTodo: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: error || null,\n    };\n  }),\n  on(TodoUIActions.updateTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: true,\n      errorUpdateTodo: null,\n    };\n  }),\n  on(TodoUIActions.updateTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: null,\n    };\n  }),\n  on(TodoUIActions.addTodoFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: error || null,\n    };\n  }),\n  on(TodoUIActions.deleteTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: true,\n      errorDeleteTodo: null,\n    };\n  }),\n  on(TodoUIActions.deleteTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: null,\n    };\n  }),\n  on(TodoUIActions.deleteTodoFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: error || null,\n    };\n  })\n)"
             },
             {
                 "name": "updateTodo",
@@ -2234,7 +2224,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] UpdateTodo',\n  props<{update: Update<Todo>}>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] UpdateTodo\",\n  props<{ update: Update<Todo> }>()\n)"
             },
             {
                 "name": "updateTodoFail",
@@ -2244,7 +2234,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] UpdateTodoFail',\n  props<{ error: string }>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] UpdateTodoFail\",\n  props<{ error: string }>()\n)"
             },
             {
                 "name": "updateTodoRequest",
@@ -2254,7 +2244,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] UpdateTodoRequest',\n  props<{ update: Update<Todo> }>()\n)"
+                "defaultValue": "createAction(\n  \"[TodoModule] UpdateTodoRequest\",\n  props<{ update: Update<Todo> }>()\n)"
             },
             {
                 "name": "updateTodoSuccess",
@@ -2264,7 +2254,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "createAction(\n  '[TodoModule] updateTodoSuccess'\n)"
+                "defaultValue": "createAction(\"[TodoModule] updateTodoSuccess\")"
             },
             {
                 "ctype": "miscellaneous",
@@ -2276,8 +2266,120 @@
                 "defaultValue": "todosAdapter.getSelectors(geTodosState)"
             }
         ],
-        "functions": [],
-        "typealiases": [],
+        "functions": [
+            {
+                "name": "createCommands",
+                "file": ".storybook/cypress-utils/index.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [],
+                "returnType": "void"
+            }
+        ],
+        "typealiases": [
+            {
+                "name": "CreateCommandsOptions",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": ".storybook/cypress-utils/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "GraphqlOperationType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"mutation\" | \"query\"",
+                "file": ".storybook/cypress-utils/types.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 185
+            },
+            {
+                "name": "GraphqlQueryMetadata",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": ".storybook/cypress-utils/types.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "LowercasedRestMethod",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"head\" | \"get\" | \"post\" | \"put\" | \"delete\" | \"patch\" | \"options\"",
+                "file": ".storybook/cypress-utils/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 185
+            },
+            {
+                "name": "MockedRequest",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "Pick<MswMockedRequest<T> | \"id\" | \"method\" | \"body\" | \"url\">",
+                "file": ".storybook/cypress-utils/utils.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 176
+            },
+            {
+                "name": "Request",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": ".storybook/cypress-utils/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "RequestCall",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": ".storybook/cypress-utils/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "RestMethod",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"HEAD\" | \"GET\" | \"POST\" | \"PUT\" | \"DELETE\" | \"PATCH\" | \"OPTIONS\"",
+                "file": ".storybook/cypress-utils/types.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 185
+            },
+            {
+                "name": "TodosState",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "EntityState<Todo>",
+                "file": "src/app/todos/states/todos.state.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 176
+            }
+        ],
         "enumerations": [],
         "groupedVariables": {
             "src/test.ts": [
@@ -2298,7 +2400,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                    "defaultValue": "require.context(\"./\", true, /\\.spec\\.ts$/)"
                 },
                 {
                     "name": "require",
@@ -2319,7 +2421,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] AddTodo',\n  props<{todo: Todo}>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] AddTodo\",\n  props<{ todo: Todo }>()\n)"
                 },
                 {
                     "name": "deleteTodo",
@@ -2329,7 +2431,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] DeleteTodo',\n  props<{id: number}>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] DeleteTodo\",\n  props<{ id: number }>()\n)"
                 },
                 {
                     "name": "loadTodos",
@@ -2339,7 +2441,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] LoadTodos',\n  props<{todos: Todo[]}>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] LoadTodos\",\n  props<{ todos: Todo[] }>()\n)"
                 },
                 {
                     "name": "updateTodo",
@@ -2349,7 +2451,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] UpdateTodo',\n  props<{update: Update<Todo>}>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] UpdateTodo\",\n  props<{ update: Update<Todo> }>()\n)"
                 }
             ],
             "src/app/todos/actions/todos-ui.actions.ts": [
@@ -2361,7 +2463,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] AddTodoFail',\n  props<{ error: string }>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] AddTodoFail\",\n  props<{ error: string }>()\n)"
                 },
                 {
                     "name": "addTodoRequest",
@@ -2371,7 +2473,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] AddTodoRequest',\n  props<{ todo: Todo }>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] AddTodoRequest\",\n  props<{ todo: Todo }>()\n)"
                 },
                 {
                     "name": "addTodoSuccess",
@@ -2381,7 +2483,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] AddTodoSuccess',\n)"
+                    "defaultValue": "createAction(\"[TodoModule] AddTodoSuccess\")"
                 },
                 {
                     "name": "deleteTodoFail",
@@ -2391,7 +2493,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] DeleteTodoFail',\n  props<{ error: string }>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] DeleteTodoFail\",\n  props<{ error: string }>()\n)"
                 },
                 {
                     "name": "deleteTodoRequest",
@@ -2401,7 +2503,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] DeleteTodoRequest',\n  props<{ id: number }>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] DeleteTodoRequest\",\n  props<{ id: number }>()\n)"
                 },
                 {
                     "name": "deleteTodoSuccess",
@@ -2411,7 +2513,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] DeleteTodoSuccess'\n)"
+                    "defaultValue": "createAction(\"[TodoModule] DeleteTodoSuccess\")"
                 },
                 {
                     "name": "loadTodosFail",
@@ -2421,7 +2523,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] LoadTodosFail',\n  props<{ error: string }>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] LoadTodosFail\",\n  props<{ error: string }>()\n)"
                 },
                 {
                     "name": "loadTodosRequest",
@@ -2431,7 +2533,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] LoadTodosRequest'\n)"
+                    "defaultValue": "createAction(\"[TodoModule] LoadTodosRequest\")"
                 },
                 {
                     "name": "loadTodosSuccess",
@@ -2441,7 +2543,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] LoadTodosSuccess'\n)"
+                    "defaultValue": "createAction(\"[TodoModule] LoadTodosSuccess\")"
                 },
                 {
                     "name": "updateTodoFail",
@@ -2451,7 +2553,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] UpdateTodoFail',\n  props<{ error: string }>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] UpdateTodoFail\",\n  props<{ error: string }>()\n)"
                 },
                 {
                     "name": "updateTodoRequest",
@@ -2461,7 +2563,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] UpdateTodoRequest',\n  props<{ update: Update<Todo> }>()\n)"
+                    "defaultValue": "createAction(\n  \"[TodoModule] UpdateTodoRequest\",\n  props<{ update: Update<Todo> }>()\n)"
                 },
                 {
                     "name": "updateTodoSuccess",
@@ -2471,7 +2573,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createAction(\n  '[TodoModule] updateTodoSuccess'\n)"
+                    "defaultValue": "createAction(\"[TodoModule] updateTodoSuccess\")"
                 }
             ],
             "src/app/todos/components/todo/todo.stories.ts": [
@@ -2549,7 +2651,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  FooterComponent,\n  NewTodoComponent,\n  TodoComponent\n]"
+                    "defaultValue": "[FooterComponent, NewTodoComponent, TodoComponent]"
                 }
             ],
             "src/app/todos/containers/index.ts": [
@@ -2561,7 +2663,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  LayoutContainer,\n  TodoListContainer,\n  TodoDetailContainer\n]"
+                    "defaultValue": "[\n  LayoutContainer,\n  TodoListContainer,\n  TodoDetailContainer,\n]"
                 }
             ],
             "src/app/todos/effects/index.ts": [
@@ -2573,7 +2675,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "any[]",
-                    "defaultValue": "[\n  TodosEffects\n]"
+                    "defaultValue": "[TodosEffects]"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -2585,7 +2687,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  production: true,\n  api: 'https://jsonplaceholder.typicode.com'\n}"
+                    "defaultValue": "{\n  production: true,\n  api: \"https://jsonplaceholder.typicode.com\",\n}"
                 }
             ],
             "src/environments/environment.ts": [
@@ -2597,7 +2699,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  production: false,\n  api: 'https://jsonplaceholder.typicode.com'\n}"
+                    "defaultValue": "{\n  production: false,\n  api: \"https://jsonplaceholder.typicode.com\",\n}"
                 }
             ],
             "src/app/todos/selectors/todos.selectors.ts": [
@@ -2619,7 +2721,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createSelector(\n  getRouterState,\n  (router) => {\n    if (router && router.state && router.state.params.filter) {\n      const filter = router.state.params.filter;\n      switch (filter) {\n        default:\n          return 'all';\n        case 'completed':\n          return 'completed';\n        case 'active':\n          return 'active';\n      }\n    }\n    return 'all';\n  }\n)"
+                    "defaultValue": "createSelector(getRouterState, (router) => {\n  if (router && router.state && router.state.params.filter) {\n    const filter = router.state.params.filter;\n    switch (filter) {\n      default:\n        return \"all\";\n      case \"completed\":\n        return \"completed\";\n      case \"active\":\n        return \"active\";\n    }\n  }\n  return \"all\";\n})"
                 },
                 {
                     "name": "geTodosState",
@@ -2629,7 +2731,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createSelector(\n  getTodosModuleState,\n  state => state.todos\n)"
+                    "defaultValue": "createSelector(\n  getTodosModuleState,\n  (state) => state.todos\n)"
                 },
                 {
                     "name": "getTodo",
@@ -2649,7 +2751,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createSelector(\n  getAllTodos,\n  getRouterState,\n  (todos, router) => {\n    if (router?.state?.params) {\n      const filter = router.state.params.filter;\n        switch (filter) {\n          default:\n            return todos;\n          case 'completed':\n            return todos.filter(t => t.completed);\n          case 'active':\n            return todos.filter(t => !t.completed);\n        }\n    }\n    return todos;\n  }\n)"
+                    "defaultValue": "createSelector(\n  getAllTodos,\n  getRouterState,\n  (todos, router) => {\n    if (router?.state?.params) {\n      const filter = router.state.params.filter;\n      switch (filter) {\n        default:\n          return todos;\n        case \"completed\":\n          return todos.filter((t) => t.completed);\n        case \"active\":\n          return todos.filter((t) => !t.completed);\n      }\n    }\n    return todos;\n  }\n)"
                 },
                 {
                     "ctype": "miscellaneous",
@@ -2661,6 +2763,48 @@
                     "defaultValue": "todosAdapter.getSelectors(geTodosState)"
                 }
             ],
+            ".storybook/cypress-utils/utils.ts": [
+                {
+                    "name": "getGraphqlQueryInfo",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": ".storybook/cypress-utils/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(\n  request: MockedRequest<GraphQLRequestBody<Record<string, any>>>\n): GraphqlQueryMetadata | null => {\n  const queryMetadata = parse(request.body?.query);\n  const queryDefinition = queryMetadata.definitions[0];\n\n  if (\n    !queryDefinition ||\n    queryDefinition.kind !== \"OperationDefinition\" ||\n    !queryDefinition.name\n  ) {\n    return null;\n  }\n\n  const {\n    operation,\n    name: { value: operationName },\n  } = queryDefinition;\n\n  return { operation, operationName };\n}"
+                },
+                {
+                    "name": "isGraphqlRequest",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": ".storybook/cypress-utils/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(\n  request: MockedRequest\n): request is MockedRequest<GraphQLRequestBody<Record<string, any>>> => {\n  const { body } = request;\n  if (!body || typeof body === \"string\") {\n    return false;\n  }\n\n  return request.method === \"POST\" && \"variables\" in body && \"query\" in body;\n}"
+                },
+                {
+                    "name": "makeUniqueKey",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": ".storybook/cypress-utils/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(request: MockedRequest): string => {\n  if (isGraphqlRequest(request)) {\n    const metadata = getGraphqlQueryInfo(request);\n    if (metadata) {\n      return `${metadata.operation}:${metadata.operationName}`;\n    }\n  }\n  return `${request.method}:${request.url.toString()}`;\n}"
+                },
+                {
+                    "name": "requestKey",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": ".storybook/cypress-utils/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(\n  routes: Set<string>,\n  request: MockedRequest\n): string | undefined => {\n  return Array.from(routes).find((r) => {\n    const [type, routeOrOperation] = r.split(/:(.+)/);\n\n    if (isGraphqlRequest(request)) {\n      const metadata = getGraphqlQueryInfo(request);\n      if (!metadata) {\n        return false;\n      }\n\n      const { operation, operationName } = metadata;\n      return operation === type && operationName === routeOrOperation;\n    }\n\n    const routeMatched = match(routeOrOperation, request.url.toString());\n    return request.method === type && routeMatched.matches;\n  });\n}"
+                }
+            ],
             "src/app/reducers/index.ts": [
                 {
                     "name": "getRouterState",
@@ -2670,7 +2814,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createFeatureSelector<\n  RouterReducerState<RouterStateUrl>\n>(\"router\")"
+                    "defaultValue": "createFeatureSelector<RouterReducerState<RouterStateUrl>>(\"router\")"
                 },
                 {
                     "name": "metaReducers",
@@ -2702,7 +2846,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createFeatureSelector<TodosModuleState>(\n  'todos-module'\n)"
+                    "defaultValue": "createFeatureSelector<TodosModuleState>(\"todos-module\")"
                 },
                 {
                     "name": "metaReducers",
@@ -2722,7 +2866,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ActionReducerMap<TodosModuleState>",
-                    "defaultValue": "{\n  todos: todosReducer,\n  todosUI: todosUIReducer\n}"
+                    "defaultValue": "{\n  todos: todosReducer,\n  todosUI: todosUIReducer,\n}"
                 }
             ],
             "src/app/todos/guards/index.ts": [
@@ -2734,7 +2878,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "any[]",
-                    "defaultValue": "[\n  TodosGuard\n]"
+                    "defaultValue": "[TodosGuard]"
                 }
             ],
             "src/app/todos/reducers/todos-ui.reducer.ts": [
@@ -2756,7 +2900,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createReducer(\n  initialState,\n  on(TodoUIActions.loadTodosRequest, (state) => {\n    return {\n      ...state,\n      loadingTodos: true,\n      errorLoadingTodos: null\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: null\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: error || null\n    };\n  }),\n  on(TodoUIActions.addTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: true,\n      errorAddTodo: null\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: null\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: error || null\n    };\n  }),\n  on(TodoUIActions.updateTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: true,\n      errorUpdateTodo: null\n    };\n  }),\n  on(TodoUIActions.updateTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: null\n    };\n  }),\n  on(TodoUIActions.addTodoFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: error || null\n    };\n  }),\n  on(TodoUIActions.deleteTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: true,\n      errorDeleteTodo: null\n    };\n  }),\n  on(TodoUIActions.deleteTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: null\n    };\n  }),\n  on(TodoUIActions.deleteTodoFail, (state, {error}) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: error || null\n    };\n  }),\n)"
+                    "defaultValue": "createReducer(\n  initialState,\n  on(TodoUIActions.loadTodosRequest, (state) => {\n    return {\n      ...state,\n      loadingTodos: true,\n      errorLoadingTodos: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingTodos: false,\n      errorLoadingTodos: error || null,\n    };\n  }),\n  on(TodoUIActions.addTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: true,\n      errorAddTodo: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosSuccess, (state) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: null,\n    };\n  }),\n  on(TodoUIActions.loadTodosFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingAddTodo: false,\n      errorAddTodo: error || null,\n    };\n  }),\n  on(TodoUIActions.updateTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: true,\n      errorUpdateTodo: null,\n    };\n  }),\n  on(TodoUIActions.updateTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: null,\n    };\n  }),\n  on(TodoUIActions.addTodoFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingUpdateTodo: false,\n      errorUpdateTodo: error || null,\n    };\n  }),\n  on(TodoUIActions.deleteTodoRequest, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: true,\n      errorDeleteTodo: null,\n    };\n  }),\n  on(TodoUIActions.deleteTodoSuccess, (state) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: null,\n    };\n  }),\n  on(TodoUIActions.deleteTodoFail, (state, { error }) => {\n    return {\n      ...state,\n      loadingDeleteTodo: false,\n      errorDeleteTodo: error || null,\n    };\n  })\n)"
                 }
             ],
             "src/app/todos/reducers/todos.reducer.ts": [
@@ -2778,7 +2922,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "createReducer(\n  initialState,\n  on(TodoActions.loadTodos, (state, {todos}) => {\n    return todosAdapter.setAll(todos, state);\n  }),\n  on(TodoActions.addTodo, (state, {todo}) => {\n    return todosAdapter.addOne(todo, state);\n  }),\n  on(TodoActions.updateTodo, (state, {update}) => {\n    return todosAdapter.updateOne(update, state);\n  }),\n  on(TodoActions.deleteTodo, (state, {id}) => {\n    return todosAdapter.removeOne(id, state);\n  }),\n)"
+                    "defaultValue": "createReducer(\n  initialState,\n  on(TodoActions.loadTodos, (state, { todos }) => {\n    return todosAdapter.setAll(todos, state);\n  }),\n  on(TodoActions.addTodo, (state, { todo }) => {\n    return todosAdapter.addOne(todo, state);\n  }),\n  on(TodoActions.updateTodo, (state, { update }) => {\n    return todosAdapter.updateOne(update, state);\n  }),\n  on(TodoActions.deleteTodo, (state, { id }) => {\n    return todosAdapter.removeOne(id, state);\n  })\n)"
                 }
             ],
             "src/app/todos/services/index.ts": [
@@ -2790,7 +2934,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "any[]",
-                    "defaultValue": "[\n  TodosService\n]"
+                    "defaultValue": "[TodosService]"
                 }
             ],
             "src/app/todos/states/todos.state.ts": [
@@ -2806,9 +2950,131 @@
                 }
             ]
         },
-        "groupedFunctions": {},
+        "groupedFunctions": {
+            ".storybook/cypress-utils/index.ts": [
+                {
+                    "name": "createCommands",
+                    "file": ".storybook/cypress-utils/index.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [],
+                    "returnType": "void"
+                }
+            ]
+        },
         "groupedEnumerations": {},
-        "groupedTypeAliases": {}
+        "groupedTypeAliases": {
+            ".storybook/cypress-utils/index.ts": [
+                {
+                    "name": "CreateCommandsOptions",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": ".storybook/cypress-utils/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                },
+                {
+                    "name": "LowercasedRestMethod",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"head\" | \"get\" | \"post\" | \"put\" | \"delete\" | \"patch\" | \"options\"",
+                    "file": ".storybook/cypress-utils/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 185
+                },
+                {
+                    "name": "Request",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": ".storybook/cypress-utils/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                },
+                {
+                    "name": "RequestCall",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": ".storybook/cypress-utils/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            ".storybook/cypress-utils/types.ts": [
+                {
+                    "name": "GraphqlOperationType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"mutation\" | \"query\"",
+                    "file": ".storybook/cypress-utils/types.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 185
+                },
+                {
+                    "name": "GraphqlQueryMetadata",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": ".storybook/cypress-utils/types.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                },
+                {
+                    "name": "RestMethod",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"HEAD\" | \"GET\" | \"POST\" | \"PUT\" | \"DELETE\" | \"PATCH\" | \"OPTIONS\"",
+                    "file": ".storybook/cypress-utils/types.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 185
+                }
+            ],
+            ".storybook/cypress-utils/utils.ts": [
+                {
+                    "name": "MockedRequest",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "Pick<MswMockedRequest<T> | \"id\" | \"method\" | \"body\" | \"url\">",
+                    "file": ".storybook/cypress-utils/utils.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 176
+                }
+            ],
+            "src/app/todos/states/todos.state.ts": [
+                {
+                    "name": "TodosState",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "EntityState<Todo>",
+                    "file": "src/app/todos/states/todos.state.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 176
+                }
+            ]
+        }
     },
     "routes": {
         "name": "<root>",
@@ -2868,12 +3134,53 @@
         "status": "low",
         "files": [
             {
-                "filePath": "e2e/app.po.ts",
-                "type": "class",
-                "linktype": "classe",
-                "name": "AppPage",
+                "filePath": ".storybook/cypress-utils/index.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "createCommands",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": ".storybook/cypress-utils/utils.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "getGraphqlQueryInfo",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": ".storybook/cypress-utils/utils.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "isGraphqlRequest",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": ".storybook/cypress-utils/utils.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "makeUniqueKey",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": ".storybook/cypress-utils/utils.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "requestKey",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -3447,15 +3754,6 @@
                 "name": "TodosUIState",
                 "coveragePercent": 0,
                 "coverageCount": "0/9",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/todos/states/todos.state.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "TodosState",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
                 "status": "low"
             },
             {

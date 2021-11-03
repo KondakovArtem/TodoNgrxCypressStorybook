@@ -13,9 +13,7 @@ export default {
     }),
 
     componentWrapperDecorator(
-      (
-        story
-      ) => `
+      () => `
       <div class="story-container">
         <div class="todo-list">
           <app-todo 
