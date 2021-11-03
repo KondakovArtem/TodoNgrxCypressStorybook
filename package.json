@@ -1,6 +1,6 @@
 {
-  "name": "todos-app-ngrx",
-  "version": "0.0.0",
+  "name": "todo-ngrx-cypress-storybook",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,6 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "tsc": "tsc .storybook/cypress-utils/index.ts",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "prestorybook": "yarn docs:json",
     "storybook": "start-storybook -s src -p 6006",
