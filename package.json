@@ -87,7 +87,8 @@
     "istanbul-instrumenter-loader": "^3.0.1",
     "@cypress/code-coverage": "^3.9.11",
     "istanbul-lib-coverage": "^3.2.0",
-    "cypress-image-snapshot": "^4.0.1"
+    "cypress-image-snapshot": "^4.0.1",
+    "cypress-wait-until": "^1.7.2"
   },
   "msw": {
     "workerDirectory": "src"

@@ -9,6 +9,8 @@ module.exports = {
         createDefaultProgram: true,
       },
       extends: [
+        "airbnb-base",
+        "airbnb-typescript/base",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "eslint:recommended",
@@ -49,10 +51,14 @@ module.exports = {
         "@typescript-eslint/ban-ts-comment": 0,
         "@typescript-eslint/no-empty-function": 0,
         "@typescript-eslint/explicit-module-boundary-types": 0,
+
         "@typescript-eslint/no-explicit-any": 0,
         "no-async-promise-executor": 0,
         "@angular-eslint/no-empty-lifecycle-method": 0,
         "@angular-eslint/no-output-on-prefix": 0,
+        "import/prefer-default-export": 0,
+        "import/no-extraneous-dependencies": 0,
+        "import/extensions": 0,
       },
     },
     {

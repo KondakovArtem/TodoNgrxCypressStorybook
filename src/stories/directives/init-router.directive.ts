@@ -1,10 +1,4 @@
-import {
-  NgModule,
-  Directive,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from "@angular/core";
+import { Directive, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { Router } from "@angular/router";
 
 /**
@@ -26,9 +20,3 @@ export class RouterInitDirective implements OnChanges {
     }
   }
 }
-
-@NgModule({
-  declarations: [RouterInitDirective],
-  exports: [RouterInitDirective],
-})
-export class RoouterInitModule {}

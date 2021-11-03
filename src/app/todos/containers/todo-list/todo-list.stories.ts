@@ -1,10 +1,15 @@
-import { componentWrapperDecorator, moduleMetadata } from "@storybook/angular";
-import { Story, Meta } from "@storybook/angular/types-6-0";
+import {
+  componentWrapperDecorator,
+  moduleMetadata,
+  Story,
+  Meta,
+} from "@storybook/angular";
 
 import { TodosModule } from "@app/todos/todos.module";
-import { TodoListContainer } from "./todo-list.container";
 import { TodosModuleState } from "@app/todos/states";
 import { rests as todoRests } from "@/../cypress/fixtures/api/index.js";
+
+import { TodoListContainer } from "./todo-list.container";
 
 export default {
   title: "Containers/TodoListContainer",
@@ -23,10 +28,10 @@ export default {
   ],
 } as Meta;
 
-//👇 We create a “template” of how args map to rendering
+// 👇 We create a “template” of how args map to rendering
 const Template: Story<TodoListContainer> = (props) => ({ props });
 
-//👇 Each story then reuses that template
+// 👇 Each story then reuses that template
 export const Basic = Template.bind({});
 Object.assign(Basic, {
   args: {
