@@ -1,8 +1,9 @@
 import { componentWrapperDecorator, moduleMetadata } from "@storybook/angular";
 import { Story, Meta } from "@storybook/angular/types-6-0";
+import { Todo } from "@todos/models";
 
-import { TodoComponent } from "./todo.component";
 import { TodosModule } from "@app/todos/todos.module";
+import { TodoComponent } from "./todo.component";
 
 export default {
   title: "Components/TodoComponent",
@@ -27,15 +28,25 @@ export default {
   ],
 } as Meta;
 
-//👇 We create a “template” of how args map to rendering
+// 👇 We create a “template” of how args map to rendering
 const Template: Story<TodoComponent> = (props) => ({ props });
 
-//👇 Each story then reuses that template
+// 👇 Each story then reuses that template
 export const Basic = Template.bind({});
 Basic.args = {
   data: {
     id: 1,
     title: "Test",
     completed: false,
-  },
+  } as Todo,
+};
+
+// 👇 Each story then reuses that template
+export const BasicCompleted = Template.bind({});
+BasicCompleted.args = {
+  data: {
+    id: 1,
+    title: "Test",
+    completed: true,
+  } as Todo,
 };

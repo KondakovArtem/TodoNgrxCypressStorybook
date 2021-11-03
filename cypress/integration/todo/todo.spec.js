@@ -18,20 +18,22 @@ describe("Test Suite ...", () => {
   it("should ...", () => {
     cy.viewport(1920, 930);
 
+    cy.server();
+    cy.route("GET", "/api/todos").as("getTodos");
+    cy.route("PATCH", "/api/todos/*").as("pathTodo");
+    cy.route("POST", "/api/todos").as("postTodos");
+
     cy.visit(
       "http://localhost:6006/iframe.html?id=containers-layoutcontainer--basic&viewMode=story",
       { headers: {} }
     );
-    cy.mswRestIntercept("GET", "/api/todos").as("getTodos");
-    cy.mswRestIntercept("PATCH", "/api/todos/:id").as("pathTodo");
-
-    
-    cy.mswWait("@getTodos");
-    cy.get(":nth-child(1) > li > div > input").click();
-    cy.get("#new-todo").type("test{enter}").blur();
-    cy.mswWait("@pathTodo");
 
     cy.wait(1000);
+    cy.get(":nth-child(1) > li > div > input").click();
+    cy.get("#new-todo").type("test{enter}").blur();
+    cy.wait(["@postTodos", "@pathTodo"]);
+    cy.wait(1000);
+
     // snapshot name will be the test title
     if (Cypress.browser.isHeadless) {
       cy.matchImageSnapshot();

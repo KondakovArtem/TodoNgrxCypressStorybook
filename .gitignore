@@ -43,3 +43,4 @@ yarn-error.log
 Thumbs.db
 .nyc_output
 coverage
+cypress/videos

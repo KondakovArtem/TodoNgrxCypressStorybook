@@ -2,7 +2,7 @@ import { FormControl } from "@angular/forms";
 
 export class CustomValidators {
   static isBlank(control: FormControl): { [key: string]: boolean } | null {
-    const value: string = control.value;
+    const { value } = control;
     if (value === null || value === "") {
       return null;
     }

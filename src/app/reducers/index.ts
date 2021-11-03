@@ -8,8 +8,8 @@ import { routerReducer, RouterReducerState } from "@ngrx/router-store";
 import { storeLogger } from "ngrx-store-logger";
 import { metaReducerForStorybook } from "storybook-ngrx-helper";
 
-import { RouterStateUrl } from "./custom-route-serializer";
 import { environment } from "@environments/environment";
+import { RouterStateUrl } from "./custom-route-serializer";
 
 export interface State {
   router: RouterReducerState<RouterStateUrl>;

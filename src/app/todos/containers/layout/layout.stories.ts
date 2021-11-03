@@ -5,6 +5,9 @@ import {
   Meta,
 } from "@storybook/angular";
 import { TodosModule } from "@app/todos/todos.module";
+import { rest } from "msw";
+
+import { Todo } from "@app/todos/models";
 import { LayoutContainer } from "./layout.container";
 import { rests as todoRests } from "@/../cypress/fixtures/api/index.js";
 
@@ -33,5 +36,31 @@ export const Basic = Template.bind({});
 Object.assign(Basic, {
   parameters: {
     msw: [...todoRests],
+  },
+});
+
+// 👇 Each story then reuses that template
+export const BasicSimpleAnswer = Template.bind({});
+Object.assign(BasicSimpleAnswer, {
+  parameters: {
+    msw: [
+      rest.get("/api/todos", (req, res, ctx) => {
+        return res(
+          ctx.delay(2000),
+          ctx.json([
+            {
+              id: 1,
+              completed: false,
+              title: "Test1",
+            },
+            {
+              id: 2,
+              completed: true,
+              title: "Test2",
+            },
+          ] as Todo[])
+        );
+      }),
+    ],
   },
 });

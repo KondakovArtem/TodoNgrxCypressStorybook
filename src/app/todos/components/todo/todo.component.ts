@@ -28,6 +28,7 @@ export class TodoComponent implements OnInit {
     this.textField.setValue(this._todo.title);
     this.checkField.setValue(this._todo.completed, { emitEvent: false });
   }
+
   @ViewChild("textInput", { static: true }) textInput: ElementRef;
   textField: FormControl;
   checkField: FormControl;

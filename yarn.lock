@@ -5017,6 +5017,11 @@ brfs@^2.0.0, brfs@^2.0.2:
     static-module "^3.0.2"
     through2 "^2.0.0"
 
+brick.json@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/brick.json/-/brick.json-0.0.6.tgz#d0a706661711b5b2c6fbdc9e86a3a9588177d086"
+  integrity sha512-C6rCyLhc5DEXu2j5fu1abjW5HtpPycaa13+TeDtoPiajH/Du+qx3ssLtmp2908pTpIgQtTN3SV+UhklnPXuJ4w==
+
 brorand@^1.0.1, brorand@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
@@ -10812,6 +10817,11 @@ lunr@^2.3.9:
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
   integrity sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==
 
+lz-string@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.4.4.tgz#c0d8eaf36059f705796e1e344811cf4c498d3a26"
+  integrity sha1-wNjq82BZ9wV5bh40SBHPTEmNOiY=
+
 macos-release@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.5.0.tgz#067c2c88b5f3fb3c56a375b2ec93826220fa1ff2"
@@ -14945,10 +14955,10 @@ storybook-addon-outline@^1.4.1:
     "@storybook/core-events" "^6.3.0"
     ts-dedent "^2.1.1"
 
-storybook-ngrx-helper@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/storybook-ngrx-helper/-/storybook-ngrx-helper-0.0.2.tgz#78963d0e8af50e12cc30197b7762b7f6c0903d2e"
-  integrity sha512-2oGR6iUmLsvOjVlv5j+zrWrw5TQsOkpNroZeYd9uawLtooCM++af60N0W0nTqhlOednWV98xHvlV4WnI7ySwDA==
+storybook-ngrx-helper@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/storybook-ngrx-helper/-/storybook-ngrx-helper-0.2.0.tgz#cdc0032836e5c2061f72d089147a50b72a2d2b07"
+  integrity sha512-p7nCnLenHO4YpGuAYMUK+eyvHn5ugxJNnB8rkyN9DSDmebX7i/wTwEW9n2TwR9w5KRkJQ49DTgZcBm90wvyNZg==
   dependencies:
     tslib "^2.1.0"
 

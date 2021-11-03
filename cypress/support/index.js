@@ -15,14 +15,4 @@
 
 // Import commands.js using ES2015 syntax:
 import "./commands";
-// import "@cypress/code-coverage/support";
-import { createCommands } from "../../.storybook/cypress-utils/index";
-
-Cypress.on("window:before:load", (win) => {
-  win;
-});
-
-createCommands();
-// import "cypress-msw-interceptor";
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+import "@cypress/code-coverage/support";

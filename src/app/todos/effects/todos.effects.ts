@@ -71,8 +71,7 @@ export class TodosEffects {
   deleteTodoRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteTodoRequest),
-      switchMap((action) => {
-        const id = action.id;
+      switchMap(({ id }) => {
         return this.todosService.deleteTodo(id).pipe(
           mergeMap(() => [deleteTodo({ id }), deleteTodoSuccess()]),
           catchError((error) => of(deleteTodoFail({ error })))

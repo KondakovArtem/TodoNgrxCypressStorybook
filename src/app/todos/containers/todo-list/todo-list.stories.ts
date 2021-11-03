@@ -59,3 +59,31 @@ Object.assign(Basic, {
     msw: [...todoRests],
   },
 });
+
+export const Basic2 = Template.bind({});
+Object.assign(Basic2, {
+  args: {
+    redux: {
+      "todos-module": {
+        todos: {
+          entities: {
+            "1": {
+              completed: true,
+              title: "Title123",
+              id: 1,
+            },
+            "2": {
+              completed: false,
+              title: "Done",
+              id: 2,
+            },
+          },
+          ids: ["1", "2"],
+        },
+      } as Partial<TodosModuleState>,
+    },
+  },
+  parameters: {
+    msw: [...todoRests],
+  },
+});

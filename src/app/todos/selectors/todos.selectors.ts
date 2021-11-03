@@ -20,7 +20,7 @@ export const getVisibleTodos = createSelector(
   getRouterState,
   (todos, router) => {
     if (router?.state?.params) {
-      const filter = router.state.params.filter;
+      const { filter } = router.state.params;
       switch (filter) {
         default:
           return todos;
@@ -39,7 +39,7 @@ export const getTodo = createSelector(
   getRouterState,
   (entities, router) => {
     if (router?.state?.params) {
-      const id = router.state.params.id;
+      const { id } = router.state.params;
       return entities[id];
     }
     return null;
@@ -53,7 +53,8 @@ export const getCountVisibleTodos = createSelector(
 
 export const getFilter = createSelector(getRouterState, (router) => {
   if (router && router.state && router.state.params.filter) {
-    const filter = router.state.params.filter;
+    const { filter } = router.state.params;
+
     switch (filter) {
       default:
         return "all";

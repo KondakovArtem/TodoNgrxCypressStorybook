@@ -8,7 +8,6 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "tsc": "tsc .storybook/cypress-utils/index.ts",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "prestorybook": "yarn docs:json",
@@ -69,7 +68,7 @@
     "@storybook/preset-scss": "^1.0.3",
     "@types/node": "^12.11.1",
     "@webcomponents/custom-elements": "^1.5.0",
-    "storybook-ngrx-helper": "^0.0.2",
+    "storybook-ngrx-helper": "^0.2.0",
     "babel-loader": "^8.2.3",
     "cypress": "^8.7.0",
     "css-loader": "^6.4.0",
@@ -88,7 +87,9 @@
     "@cypress/code-coverage": "^3.9.11",
     "istanbul-lib-coverage": "^3.2.0",
     "cypress-image-snapshot": "^4.0.1",
-    "cypress-wait-until": "^1.7.2"
+    "cypress-wait-until": "^1.7.2",
+    "brick.json": "^0.0.6",
+    "lz-string": "^1.4.4"
   },
   "msw": {
     "workerDirectory": "src"

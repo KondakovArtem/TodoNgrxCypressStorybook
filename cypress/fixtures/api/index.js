@@ -1,4 +1,4 @@
-import { createCRUDRests } from "../crud";
+import { crudFactory } from "storybook-ngrx-helper";
 import cloneDeep from "lodash/cloneDeep";
 
 import todos from "./todos.json";
@@ -12,7 +12,7 @@ const store = {
 };
 
 export const rests = [
-  ...createCRUDRests({
+  ...crudFactory({
     STORE_GET: () => store.todos,
     STORE_SET: (value) => (store.todos = value),
     GET_LIST: "/api/todos",
