@@ -1,10 +1,10 @@
 <section id="main" class="main" *ngIf="todos$ | async as todos">
-  <ul id="todo-list" class="todo-list">
-    <app-todo
-      (update)="onUpdate($event)"
-      (delete)="onDelete($event)"
-      [todo]="todo"
-      *ngFor="let todo of todos"
-    ></app-todo>
-  </ul>
+    <ul id="todo-list" class="todo-list">
+        <app-todo
+            (update)="onUpdate($event)"
+            (delete)="onDelete($event)"
+            [todo]="todo"
+            *ngFor="let todo of todos"
+        ></app-todo>
+    </ul>
 </section>

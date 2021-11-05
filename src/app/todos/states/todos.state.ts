@@ -1,5 +1,5 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
-import { Todo } from "@todos/models";
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Todo } from '@todos/models';
 
 export type TodosState = EntityState<Todo>;
 
