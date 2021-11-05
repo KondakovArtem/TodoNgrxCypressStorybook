@@ -5,10 +5,10 @@ module.exports = {
             customSyntax: 'postcss-scss',
         },
     ],
+    plugins: ['stylelint-prettier'],
     extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier'],
     rules: {
-        indentation: 4,
-        'string-quotes': 'single',
+        'prettier/prettier': true,
         'no-descending-specificity': null,
         'scss/at-mixin-pattern': null,
         'scss/at-function-pattern': null,
@@ -17,6 +17,6 @@ module.exports = {
         'color-function-notation': 'legacy',
         'scss/dollar-variable-empty-line-before': null,
         'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['ng-deep'] }],
-        'number-max-precision': 6
+        'number-max-precision': 6,
     },
 };

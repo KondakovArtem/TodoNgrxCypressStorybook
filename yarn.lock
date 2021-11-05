@@ -20665,6 +20665,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stylelint-prettier@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "stylelint-prettier@npm:1.2.0"
+  dependencies:
+    prettier-linter-helpers: ^1.0.0
+  peerDependencies:
+    prettier: ">= 0.11.0"
+    stylelint: ">= 9.2.1"
+  checksum: 8bc3cf7277e0a92e59fa7bf96fde90720f7e43676be3de8a595da05429a11a3677553d4b742a038517ddd41ae1a88ce2c0f7d1676c7c7278c15d4b1c73f173be
+  languageName: node
+  linkType: hard
+
 "stylelint-scss@npm:^4.0.0":
   version: 4.0.0
   resolution: "stylelint-scss@npm:4.0.0"
@@ -21317,6 +21329,7 @@ __metadata:
     stylelint: ^14.0.1
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard-scss: ^2.0.1
+    stylelint-prettier: ^1.2.0
     todomvc-app-css: ^2.4.1
     todomvc-common: ^1.0.5
     ts-node: ^10.3.0
