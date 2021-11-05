@@ -1,4 +1,4 @@
-import type { Type } from "@angular/core";
+import type { Provider } from "@angular/core";
 import { TodosService } from "./todos.service";
 
-export const SERVICES: Type<unknown>[] = [TodosService];
+export const SERVICES: Provider[] = [TodosService];
