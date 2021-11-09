@@ -8,6 +8,7 @@ import { TodoDetailContainer } from './containers/todo-detail/todo-detail.contai
 const routes: Routes = [
     {
         path: '',
+        pathMatch: 'full',
         component: LayoutContainer,
         canActivate: [TodosGuard],
     },

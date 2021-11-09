@@ -14,9 +14,11 @@ export class TodosService {
         return this.http.get<Todo[]>(url).pipe(map((todos) => todos.slice(0, 10)));
     }
 
-    createTodo(reqTodo: Todo): Observable<Todo> {
+    createTodo(todo: Todo): Observable<Todo> {
         const url = `${this.apiUrl}/todos`;
-        return this.http.post<{ todo: Todo }>(url, { reqTodo }).pipe(map(({ todo }) => todo));
+        return this.http
+            .post<{ todo: Todo }>(url, { todo })
+            .pipe(map(({ todo: resTodo }) => resTodo));
     }
 
     updateTodo(todo: Partial<Todo>): Observable<Todo> {
